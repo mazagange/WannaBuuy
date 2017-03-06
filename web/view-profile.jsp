@@ -4,6 +4,7 @@
     Author     : ibrahiem
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,59 +45,77 @@
                     <div class="col-sm-4 ">
                         <div class="signup-form" >
 
-                            First Name:<label  name="firstName"></label>
-                            </br>
-                            Last Name:<label  name="lastName"   ></label>            
-                            </br>
-                            Email : <label  name="email"   ></label> 
-                            </br>
-                            City:<lable name="city"   ></lable>                              
-                            </br>
-                            Country:<label  name="country"   ></label>
-                            </br>
-                            address:<label  name="adress"   ></label> 
-                            </br>
-                            phone : <label  name="phone"   ></label>          
-                            </br>
-                            zip Code :<label name="zipCode" ></label>                     
-                            </br>
+                            First Name: <label  name="firstName">
+                                <c:out value="${sessionScope.user.firstName}"></c:out>
+                                </label>
+                                </br>
+                                Last Name: <label  name="lastName"  >
+                                <c:out value="${sessionScope.user.lastName}"></c:out>
+                                </label>            
+                                </br>
+                                Email : <label  name="email"   >
+                                <c:out value="${sessionScope.user.email}"></c:out>
+                                </label> 
+                                </br>
+                                City:<lable name="city"   >
+                                <c:out value="${sessionScope.user.city}"></c:out>
+                                </lable>                              
+                                </br>
+                                Country:<label  name="country"   >
+                                <c:out value="${sessionScope.user.country}"></c:out>
+                                </label>
+                                </br>
+                                address:<label  name="adress"   >
+                                <c:out value="${sessionScope.user.address}"></c:out>
+                                </label> 
+                                </br>
+                                phone : <label  name="phone"   >
+                                <c:out value="${sessionScope.user.phone}"></c:out>
+                                </label>          
+                                </br>
+                                zip Code :<label name="zipCode" >
+                                <c:out value="${sessionScope.user.zipCode}"></c:out>
+                                </label>                     
+                                </br>
 
-                            credit: <label  name="credit" ></label>   
-                            </br>
+                                credit: <label  name="credit" > 
+                                <c:out value="${sessionScope.user.credit}"></c:out>
+                                </label>   
+                                </br>
 
-                            <button type="submit" value="submit" onclick="document.location.href = 'edit-profile.jsp'" class="btn btn-default">Edit Profile</button>
+                                <button type="submit" value="submit" onclick="document.location.href = 'edit-profile.jsp'" class="btn btn-default">Edit Profile</button>
 
 
 
+                            </div>
+                        </div>
+                        <!--                    <div class="col-sm-1">
+                                                <h2 class="or">OR</h2>
+                                            </div>-->
+                        <div class="col-sm-4">
+                            <!--                        <div class="signup-form">sign up form
+                                                        <h2>New User Signup!</h2>
+                                                        <form action="#">
+                                                            <input type="text" name="fName" placeholder="first Name" required/>
+                                                            <input type="text" name="lName" placeholder="last Name" required/>
+                            
+                            
+                                                            <input type="email" name="email" placeholder="Email Address" required />
+                                                            <input type="password" name="pass" placeholder="Password" required/>
+                                                            <input type="text" name="city" placeholder="City" required/>
+                                                            <input type="text" name="country" placeholder=" Country" required/>
+                                                            <input type="text" name="address" placeholder="Address" required/>
+                                                            <input type="tel" name="phone" placeholder="Phone" required/>
+                                                            <input type="number" name="zip" placeholder="Postal code" required />
+                                                            <button type="submit" class="btn btn-default">Signup</button>
+                                                        </form>
+                                                    </div>/sign up form-->
                         </div>
                     </div>
-                    <!--                    <div class="col-sm-1">
-                                            <h2 class="or">OR</h2>
-                                        </div>-->
-                    <div class="col-sm-4">
-                        <!--                        <div class="signup-form">sign up form
-                                                    <h2>New User Signup!</h2>
-                                                    <form action="#">
-                                                        <input type="text" name="fName" placeholder="first Name" required/>
-                                                        <input type="text" name="lName" placeholder="last Name" required/>
-                        
-                        
-                                                        <input type="email" name="email" placeholder="Email Address" required />
-                                                        <input type="password" name="pass" placeholder="Password" required/>
-                                                        <input type="text" name="city" placeholder="City" required/>
-                                                        <input type="text" name="country" placeholder=" Country" required/>
-                                                        <input type="text" name="address" placeholder="Address" required/>
-                                                        <input type="tel" name="phone" placeholder="Phone" required/>
-                                                        <input type="number" name="zip" placeholder="Postal code" required />
-                                                        <button type="submit" class="btn btn-default">Signup</button>
-                                                    </form>
-                                                </div>/sign up form-->
-                    </div>
                 </div>
-            </div>
-        </section><!--/form-->
+            </section><!--/form-->
 
-        <!--include the footer of the page-->
+            <!--include the footer of the page-->
 
         <jsp:include page="footer.jsp" />
         <!--end the footer of the page-->

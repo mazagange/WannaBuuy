@@ -67,4 +67,6 @@ public interface DB {
 
     public boolean updatePassword(String email, String newPassword);
 
+    public User retriveUserObj(int userId);
+
 }

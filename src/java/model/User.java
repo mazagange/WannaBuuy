@@ -17,7 +17,7 @@ public class User {
     private String email;
     private String password;
     private String firstName;
-    private String LastName;
+    private String lastName;
     private String city;
     private String country;
     private String address;
@@ -29,7 +29,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName + ", LastName=" + LastName + ", city=" + city + ", country=" + country + ", address=" + address + ", phone=" + phone + ", emailConfirmed=" + emailConfirmed + ", zipCode=" + zipCode + ", registrationDate=" + registrationDate + ", credit=" + credit + '}';
+        return "User{" + "id=" + id + ", email=" + email + ", password=" + password + ", firstName=" + firstName + ", LastName=" + lastName + ", city=" + city + ", country=" + country + ", address=" + address + ", phone=" + phone + ", emailConfirmed=" + emailConfirmed + ", zipCode=" + zipCode + ", registrationDate=" + registrationDate + ", credit=" + credit + '}';
     }
 
     public User() {
@@ -68,11 +68,11 @@ public class User {
     }
 
     public String getLastName() {
-        return LastName;
+        return lastName;
     }
 
     public void setLastName(String LastName) {
-        this.LastName = LastName;
+        this.lastName = LastName;
     }
 
     public String getCity() {
@@ -144,7 +144,7 @@ public class User {
         this.email = email;
         this.password = password;
         this.firstName = firstName;
-        this.LastName = LastName;
+        this.lastName = LastName;
         this.city = city;
         this.country = country;
         this.address = address;

@@ -47,4 +47,6 @@ public interface BusinessLogic {
     public boolean resetPassword(String email, String token);
 
     public void addCreditCard(double amount);
+
+    public User updateUserInfo(User user);
 }

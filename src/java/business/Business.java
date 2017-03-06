@@ -181,6 +181,12 @@ public class Business implements business.BusinessLogic {
 
     }
 
+    public User updateUserInfo(User user) {
+        Database db = Database.getInstance();
+        db.updateUser(user);
+        return db.retriveUserObj(user.getId());
+    }
+
 
     /*End israa*/
  /* Start Asmaa*/

@@ -150,7 +150,7 @@ public class Database implements DB {
             pst.setString(5, user.getPhone());
             pst.setString(6, user.getCountry());
             pst.setString(7, user.getAddress());
-            pst.setInt(9, user.getId());
+            pst.setInt(8, user.getId());
             pst.executeUpdate();
             pst.close();
         } catch (SQLException ex) {
@@ -268,6 +268,31 @@ public class Database implements DB {
             ex.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public User retriveUserObj(int userId) {
+        try {
+            PreparedStatement pst = con.prepareStatement("select * from user where user_id = ?");
+            pst.setInt(1, userId);
+            User user = null;
+
+            ResultSet resultset = pst.executeQuery();
+            if (resultset.next()) {
+                user = new User(resultset.getInt("user_id"), resultset.getString("email"), "", resultset.getString("fname"), resultset.getString("lname"),
+                        resultset.getString("city"), resultset.getString("country"), resultset.getString("address"),
+                        resultset.getString("phone"), resultset.getBoolean("user_email_verified"),
+                        resultset.getInt("zip"), resultset.getDate("registration_date"), resultset.getDouble("credite"));
+                return user;
+
+            }
+
+            pst.close();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+
     }
 
     /*end israa*/

@@ -45,14 +45,13 @@
                         <div class="login-form" >
                             <form action="EditProfile" method="POST">
 
-                                <label>First Name</label><input type="text" name="firstName"/>                 
-                                <label>Last Name</label><input type="text" name="lastName"   />           
-                                <label>email </label><input  type="email"name="email"   /> 
-                                <label>city</label><input type="text" name="city"  />                             
-                                <label>country</label><input  type="text" name="country"  /> 
-                                <label>address</label><input type="text" name="adress"  /> 
-                                <label>phone</label><input type="tel"  name="phone" />       
-                                <label>Zip code</label><input type="number" name="zipCode" />                    
+                                <label>First Name</label><input type="text" name="firstName" value="${sessionScope.user.firstName}"/>                 
+                                <label>Last Name</label><input type="text" name="lastName" value="${sessionScope.user.lastName}" />        
+                                <label>city</label><input type="text" name="city" value="${sessionScope.user.city}" />                             
+                                <label>country</label><input  type="text" name="country" value="${sessionScope.user.country}" /> 
+                                <label>address</label><input type="text" name="address" value="${sessionScope.user.address}" /> 
+                                <label>phone</label><input type="tel"  name="phone" value="${sessionScope.user.phone}"/>       
+                                <label>Zip code</label><input type="number" name="zipCode" value="${sessionScope.user.zipCode}"/>                    
                                 <button type="submit" value="submit" class="btn btn-default">Edit</button>
 
                             </form>
