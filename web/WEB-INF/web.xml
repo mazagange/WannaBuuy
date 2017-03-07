@@ -7,7 +7,7 @@
     <servlet>
         <servlet-name>AddProduct</servlet-name>
         <servlet-class>controllers.admin.AddProduct</servlet-class>
-    </servlet>
+    </servlet>    
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>controllers.Login</servlet-class>
@@ -171,9 +171,7 @@
     <servlet-mapping>
         <servlet-name>Search</servlet-name>
         <url-pattern>/Search</url-pattern>
-        <servlet-name>AdminHome</servlet-name>
-        <servlet-class>controllers.admin.AdminHome</servlet-class>
-    </servlet>
+    </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddCategory</servlet-name>
         <url-pattern>/Admin/AddCategory</url-pattern>
@@ -262,6 +260,10 @@
         <servlet-name>AdminHome</servlet-name>
         <url-pattern>/Admin</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminHome</servlet-name>
+        <servlet-class>controllers.admin.AdminHome</servlet-class>
+    </servlet>
     <session-config>
         <session-timeout>
             30
