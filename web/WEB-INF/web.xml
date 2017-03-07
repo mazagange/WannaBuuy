@@ -7,7 +7,7 @@
     <servlet>
         <servlet-name>AddProduct</servlet-name>
         <servlet-class>controllers.admin.AddProduct</servlet-class>
-    </servlet>    
+    </servlet>
     <servlet>
         <servlet-name>Login</servlet-name>
         <servlet-class>controllers.Login</servlet-class>
@@ -89,10 +89,6 @@
         <url-pattern>/AddCategory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminAddCards</servlet-name>
-        <url-pattern>/Admin/AddCards</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AddProduct</servlet-name>
         <url-pattern>/AddProduct</url-pattern>
     </servlet-mapping>
@@ -172,98 +168,22 @@
         <servlet-name>Search</servlet-name>
         <url-pattern>/Search</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddCategory</servlet-name>
-        <url-pattern>/Admin/AddCategory</url-pattern>
-    </servlet-mapping>
+    <servlet>
+        <servlet-name>AdminHome</servlet-name>
+        <servlet-class>controllers.admin.AdminHome</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AdminAddCards</servlet-name>
         <url-pattern>/Admin/AddCards</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AddProduct</servlet-name>
-        <url-pattern>/Admin/AddProduct</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Login</servlet-name>
-        <url-pattern>/Login</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Signup</servlet-name>
-        <url-pattern>/Signup</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Confirm</servlet-name>
-        <url-pattern>/Confirm</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Product</servlet-name>
-        <url-pattern>/Product</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>Products</servlet-name>
-        <url-pattern>/Products</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ForgetPassword</servlet-name>
-        <url-pattern>/ForgetPassword</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>400</error-code>
         <location>/404.html</location>
     </error-page>
     <servlet-mapping>
-        <servlet-name>ResetPassword</servlet-name>
-        <url-pattern>/ResetPassword</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminProducts</servlet-name>
-        <url-pattern>/Admin/Products</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminCatergories</servlet-name>
-        <url-pattern>/Admin/Catergories</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminUsers</servlet-name>
-        <url-pattern>/Admin/Users</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminCards</servlet-name>
-        <url-pattern>/Admin/Cards</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminEditProduct</servlet-name>
-        <url-pattern>/Admin/EditProduct</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminDeleteProduct</servlet-name>
-        <url-pattern>/Admin/DeleteProduct</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminDeleteCategory</servlet-name>
-        <url-pattern>/Admin/DeleteCategory</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminDisplayUserOrders</servlet-name>
-        <url-pattern>/Admin/DisplayUserOrders</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>AdminPrintCard</servlet-name>
-        <url-pattern>/Admin/PrintCard</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>EditProfile</servlet-name>
-        <url-pattern>/EditProfile</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>AdminHome</servlet-name>
         <url-pattern>/Admin</url-pattern>
     </servlet-mapping>
-    <servlet>
-        <servlet-name>AdminHome</servlet-name>
-        <servlet-class>controllers.admin.AdminHome</servlet-class>
-    </servlet>
     <session-config>
         <session-timeout>
             30
