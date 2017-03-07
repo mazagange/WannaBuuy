@@ -80,9 +80,13 @@
         <servlet-name>EditProfile</servlet-name>
         <servlet-class>controllers.EditProfile</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminHome</servlet-name>
+        <servlet-class>controllers.admin.AdminHome</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCategory</servlet-name>
-        <url-pattern>/AddCategory</url-pattern>
+        <url-pattern>/Admin/AddCategory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminAddCards</servlet-name>
@@ -90,7 +94,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddProduct</servlet-name>
-        <url-pattern>/AddProduct</url-pattern>
+        <url-pattern>/Admin/AddProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -163,6 +167,10 @@
     <servlet-mapping>
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/EditProfile</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminHome</servlet-name>
+        <url-pattern>/Admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

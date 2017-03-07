@@ -5,7 +5,6 @@
  */
 package controllers.admin;
 
-import business.Business;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,10 +16,9 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author ahmed mohsen
  */
-public class DeleteCategory extends HttpServlet {
+public class AdminHome extends HttpServlet {
 
     
-
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -33,23 +31,10 @@ public class DeleteCategory extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String categoryName = request.getParameter("name");
-        if (categoryName == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "no category to delete");
-        } else {
-            Business business = new Business();
-            business.deleteCategory(categoryName);
-            response.sendRedirect("Categories?msg=deleted");
-        }
+        request.getRequestDispatcher("AdminHome.jsp").forward(request, response);
     }
 
     
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
     @Override
     public String getServletInfo() {
         return "Short description";
