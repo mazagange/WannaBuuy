@@ -21,7 +21,7 @@ import model.CreditCard;
  */
 public class Cards extends HttpServlet {
 
-    
+   
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
@@ -35,16 +35,13 @@ public class Cards extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
         Business business = new Business();
         List<CreditCard> retriveCards = business.retriveCards();
         request.setAttribute("cards", retriveCards);
         request.getRequestDispatcher("cards.jsp").forward(request, response);
-
-        
     }
 
-
+    
     /**
      * Returns a short description of the servlet.
      *

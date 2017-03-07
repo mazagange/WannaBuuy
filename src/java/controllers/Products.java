@@ -48,7 +48,7 @@ public class Products extends HttpServlet {
             Business business = new Business();
             List<model.Product> products = business.retriveProducts(category);
             System.out.println(products.size());
-            Stream<Product> stream = products.stream();
+            Stream<Product> stream = products.stream().filter((t) -> t.getStockQuantity() > 0);
             if (pageNo == 1) {
                 stream = stream.limit(12);
             } else {

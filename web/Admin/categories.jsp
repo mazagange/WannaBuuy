@@ -45,7 +45,7 @@
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
                             <h2>Categories</h2>
-                            
+                            <a href="AddCategory">Add category</a>
                             <table>
                                 <tr><th>Category  name</th><th></th></tr>
                                 <c:forEach items="${categories}" var="cat">

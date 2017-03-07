@@ -45,6 +45,7 @@
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
                             <h2>cards</h2>
+                            <a href="AddCards">Add Cards</a>
                             <table>
                                 <tr><th>number</th><th>amount</th></tr>
                                 <c:forEach items="${cards}" var="card">
