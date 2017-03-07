@@ -44,7 +44,7 @@
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
                             <h2>Enter an amount For new Card</h2>
-                            <form action="Cards" method="post" >
+                            <form action="AddCards" method="post" >
 
 
 

@@ -59,6 +59,7 @@ public class AddCards extends HttpServlet {
         double cardAmount = Double.parseDouble(request.getParameter("amount"));
         business.addCreditCard(cardAmount);
         out.close();
+        response.sendRedirect("Cards?msg=added");
     }
 
     /**
