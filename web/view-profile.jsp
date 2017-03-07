@@ -93,23 +93,13 @@
                                                 <h2 class="or">OR</h2>
                                             </div>-->
                         <div class="col-sm-4">
-                            <!--                        <div class="signup-form">sign up form
-                                                        <h2>New User Signup!</h2>
-                                                        <form action="#">
-                                                            <input type="text" name="fName" placeholder="first Name" required/>
-                                                            <input type="text" name="lName" placeholder="last Name" required/>
-                            
-                            
-                                                            <input type="email" name="email" placeholder="Email Address" required />
-                                                            <input type="password" name="pass" placeholder="Password" required/>
-                                                            <input type="text" name="city" placeholder="City" required/>
-                                                            <input type="text" name="country" placeholder=" Country" required/>
-                                                            <input type="text" name="address" placeholder="Address" required/>
-                                                            <input type="tel" name="phone" placeholder="Phone" required/>
-                                                            <input type="number" name="zip" placeholder="Postal code" required />
-                                                            <button type="submit" class="btn btn-default">Signup</button>
-                                                        </form>
-                                                    </div>/sign up form-->
+                            <div class="signup-form">
+                                <h2>Recharging Account</h2>
+                                <form action="#">
+                                    <input type="text" name="creditRecharge" placeholder="Enter credit number" required/>
+                                    <button type="submit" class="btn btn-default">Recharge</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

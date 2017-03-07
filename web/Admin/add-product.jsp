@@ -1,5 +1,5 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="my" uri="/WEB-INF/tlds/tag.tld" %>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -151,14 +151,16 @@
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
-                            <h2>Login to your account</h2>
+                            <h2>Add Product</h2>
                             <form method="post" enctype="multipart/form-data"  name="productForm">
                                 <input type="text" name="name" placeholder="Name" required/>
                                 <input type="number" name="price" step="0.01" min="0" placeholder="price" required/>
                                 <textarea placeholder="Description" name="desc" cols="50" rows="10" required ></textarea>
                                 <input type="number" name="stock"  min="0" placeholder="Stock Quantity" required/>
                                 <select name="category">
-                                    <my:CategoriesTag/>
+                                    <c:forEach items="${categories}" var="cat">
+                                        <option value="${cat}">${cat}</option>
+                                    </c:forEach>
                                 </select>
 
                                 <input type='file' name="image" accept="image/*" onchange="readURL(this);" style="background: none"  required/>
@@ -360,34 +362,6 @@
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
-        <script>
-                                   
-                                    var form = document.forms.namedItem("productForm");
-                                    form.addEventListener('submit', function (ev) {
-
-                                        
-                                                oData = new FormData(form);
-                                                console.log(oData);
-
-                                        
-
-                                        var oReq = new XMLHttpRequest();
-                                        oReq.open("POST", "AddProduct", true);
-                                        oReq.onload = function (oEvent) {
-                                            if (oReq.status == 200) {
-                                                console.log("Uploaded!");
-                                                form.reset();
-                                            } else {
-                                                console.log("not Uploaded!");
-                                                form.reset();
-                                            }
-                                        };
-
-                                        oReq.send(oData);
-                                        ev.preventDefault();
-                                    }, false);
-
-
-        </script>
+        
     </body>
 </html>

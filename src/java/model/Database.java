@@ -256,7 +256,7 @@ public class Database implements DB {
 
         try {
             PreparedStatement pst = con.prepareStatement("UPDATE user set password=?,passwordResetToken=?  where email=?");
-            
+
             String hashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt());
             pst.setString(1, hashedPassword);
             pst.setString(2, "");
@@ -407,7 +407,7 @@ public class Database implements DB {
     public void deleteProduct(int productId) {
         try {
             PreparedStatement delete = con.prepareStatement("delete from product where product_id = ?");
-            delete.setInt(1,productId);
+            delete.setInt(1, productId);
             delete.execute();
         } catch (SQLException e) {
             // TODO Auto-generated catch block
@@ -547,7 +547,6 @@ public class Database implements DB {
         return true;
     }
 
-
     public List<Order> retriveOrders(int userId) {
         List<Order> orders = new ArrayList<>();
         try {
@@ -569,22 +568,20 @@ public class Database implements DB {
                 select2.setInt(1, order.getId());
                 ResultSet rs2 = select2.executeQuery();
                 while (rs2.next()) {
-                    
+
                     orderProducts.add(new OrderProduct(new Product(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getInt(6), ""), rs.getInt(7)));
                 }
-                    rs2.close();
-                    order.setOrderDetails(orderProducts);
-                    orders.add(order);
-                }
-                rs.close();
-            }catch (SQLException e) {
+                rs2.close();
+                order.setOrderDetails(orderProducts);
+                orders.add(order);
+            }
+            rs.close();
+        } catch (SQLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-            return orders;
-        }
-    
-    
+        return orders;
+    }
 
     public List<User> retriveUsers() {
         List<User> users = new ArrayList<>();
@@ -613,7 +610,7 @@ public class Database implements DB {
         }
         return users;
     }
-    
+
     public void printCard(int cardId) {
         try {
             PreparedStatement update = con.prepareStatement("update creditcard set printed= '1' where creditCard_id = ?");
@@ -624,7 +621,7 @@ public class Database implements DB {
             e.printStackTrace();
         }
     }
-    
+
     public List<CreditCard> retriveCards() {
         List<CreditCard> creditCards = new ArrayList<>();
         try {
@@ -782,6 +779,40 @@ public class Database implements DB {
         System.out.println("list size " + orderProductList.size());
         return orderProductList;
     }
-    /*End asmaa*/
 
+    /*End asmaa*/
+ /*Start ibrahiem*/
+    @Override
+    public List<Product> retriveProducts(String searchText, String categoryName) {
+        List<Product> products = new ArrayList<>();
+        try {
+
+            PreparedStatement select = con.prepareStatement("SELECT product.product_id, product.product_name,product.price,"
+                    + " product.description,product.image,"
+                    + " product.quantityInStock,productcategory.category_name as cat_name FROM"
+                    + " product LEFT JOIN productcategory ON product.product_category=productcategory.category_id"
+                    + " Where category_name = ? and product_name like ?");
+            select.setString(1, categoryName);
+            select.setString(2, "%" + searchText + "%");
+
+            ResultSet rs = select.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt(1));
+                product.setName(rs.getString(2));
+                product.setPrice(rs.getDouble(3));
+                product.setDescription(rs.getString(4));
+                product.setImage(rs.getString(5));
+                product.setStockQuantity(rs.getInt(6));
+                product.setCategory(rs.getString(7));
+                products.add(product);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return products;
+    }
+    /*end ibrahiem*/
 }
