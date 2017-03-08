@@ -8,6 +8,7 @@ package business;
 import java.util.ArrayList;
 import java.util.List;
 import model.CreditCard;
+import model.Order;
 import model.OrderProduct;
 import model.Product;
 import model.User;
@@ -48,5 +49,10 @@ public interface BusinessLogic {
 
     public void addCreditCard(double amount);
 
-    public User updateUserInfo(User user);
+    public boolean addOrder(User user, Order order);
+    
+    public void updateUser(User user);
+
+    public void updateProduct(Product product);
+
 }

@@ -227,6 +227,19 @@ public class Business implements business.BusinessLogic {
     public boolean cartExsits(User user, Product product) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
+@Override
+    public boolean addOrder(User user, Order order) {
+         Database db = Database.getInstance();
+         db.addOrder(user,order);
+    
+        return true;
+     }
+
+    @Override
+    public void updateUser(User user) {
+         Database db = Database.getInstance();
+         db.updateUser(user);
+    }
 
     /*end asmaa*/
  /*Start ibrahiem*/
@@ -244,5 +257,7 @@ public class Business implements business.BusinessLogic {
             }
         }
     }
-    /*end ibrahiem*/
-}
+        /*end ibrahiem*/
+
+    
+    }

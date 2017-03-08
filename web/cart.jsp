@@ -29,6 +29,202 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script >
+  $(document).ready(function(){
+        console.log(" am here ");
+       if(checkUserExist()){
+            retrieveFromCart();
+        }
+    });
+ var userExist=false;
+ function checkUserExist(){
+  var user = $('#userId').val();
+   if(user !==""){
+     userExist=true;
+    }
+   return userExist;
+  }
+  function submitedfun(responseTxt,statusTxt,xhr){
+        if(statusTxt ==="success"){
+            console.log(" scuccess transaction ");
+            var tbody=document.getElementById("tbody");
+            for(var i=0; i<responseTxt.length;i++){
+                 console.log("product id: "+responseTxt[i].product.id+"  -->  "+
+                         responseTxt[i].product.name+"  --> "+responseTxt[i].product.price+"  --> "
+                         +responseTxt[i].product.description+"  --> "+responseTxt[i].product.image+" -->  "
+                         +responseTxt[i].product.stockQuantity+"  --> "+responseTxt[i].product.category+" --> "
+                         +responseTxt[i].quantity);
+                
+                 var timage= document.createTextNode(responseTxt[i].product.image);
+                 var tproduct_desc= document.createTextNode(responseTxt[i].product.description);
+                 var tproduct_id= document.createTextNode("Web ID: "+responseTxt[i].product.id);
+                 var tproduct_price= document.createTextNode("$"+responseTxt[i].product.price);
+                 var torderProduct_quentity= document.createTextNode(responseTxt[i].quantity);
+                 var ttotal_price= document.createTextNode("$"+eval(responseTxt[i].product.price*responseTxt[i].quantity));
+                 var tproduct_plus= document.createTextNode("+");
+                 var tproduct_minus= document.createTextNode("-");
+                 
+                var rproduct_record = document.createElement('tr');
+            
+                 var cproduct=document.createElement('td');
+                 cproduct.setAttribute("class","cart_product");
+                    var ahref_c1=document.createElement('a');
+                    ahref_c1.setAttribute("href","");
+                    var image_c1=document.createElement('img');
+                    image_c1.setAttribute("src",responseTxt[i].product.image);
+                    image_c1.setAttribute("alt","");
+                    ahref_c1.appendChild(image_c1);
+                    cproduct.appendChild(ahref_c1);    
+                 
+                 var cproduct_description=document.createElement('td');
+                 cproduct_description.setAttribute("class","cart_description");   
+                    var h4_c2=document.createElement('h4');
+                        var ahref_c2=document.createElement('a');
+                        ahref_c2.setAttribute("href","");
+                        ahref_c2.appendChild(tproduct_desc);
+                    h4_c2.appendChild(ahref_c2);    
+                    var p_c2=document.createElement('p');
+                    p_c2.appendChild(tproduct_id);
+                 cproduct_description.appendChild(h4_c2);     
+                 cproduct_description.appendChild(p_c2); 
+                 
+                 var cproduct_price=document.createElement('td');
+                 cproduct_price.setAttribute("class","cart_price");   
+                    var p_c3=document.createElement('p');
+                    p_c3.appendChild(tproduct_price);
+                 cproduct_price.appendChild(p_c3);     
+                 
+                 var corderProduct_quentity=document.createElement('td');
+                 corderProduct_quentity.setAttribute("class","cart_quantity"); 
+                    var div_c4=document.createElement("div");
+                    div_c4.setAttribute("class","cart_quantity_button");
+                       var ahref_c4=document.createElement('a');
+                        ahref_c4.setAttribute("class","cart_quantity_up");
+                        ahref_c4.setAttribute("onclick","cartQuantityUp(\"quentity"+responseTxt[i].product.id+"\","+responseTxt[i].product.stockQuantity+","+responseTxt[i].product.price+");");
+                        ahref_c4.appendChild(tproduct_plus);
+                        var input_c4=document.createElement('input');
+                            input_c4.setAttribute("class","cart_quantity_input");
+                            input_c4.setAttribute("type","text");
+                            input_c4.setAttribute("readOnly",true);
+                           
+                            input_c4.setAttribute("name","quantity");
+                            input_c4.setAttribute("value",responseTxt[i].quantity);
+                            input_c4.setAttribute("id","quentity"+responseTxt[i].product.id);
+                            input_c4.setAttribute("autocomplete","off");
+                            input_c4.setAttribute("size","2");
+                       var ahref_c41=document.createElement('a');
+                       ahref_c41.setAttribute("class","cart_quantity_down");
+                       ahref_c41.setAttribute("onclick","cartQuatityDown(\"quentity"+responseTxt[i].product.id+"\","+responseTxt[i].product.stockQuantity+","+responseTxt[i].product.price+");");
+                       ahref_c41.appendChild(tproduct_minus);
+                    div_c4.appendChild(ahref_c4);   
+                    div_c4.appendChild(input_c4);
+                    div_c4.appendChild(ahref_c41);
+                    corderProduct_quentity.appendChild(div_c4);
+                var ctotal_price=document.createElement('td');
+                 ctotal_price.setAttribute("class","cart_total");   
+                    var p_c5=document.createElement('p');
+                    p_c5.setAttribute("class","cart_total_price"); 
+                    p_c5.setAttribute("id","p"+responseTxt[i].product.id); 
+                    p_c5.appendChild(ttotal_price);
+                 ctotal_price.appendChild(p_c5);     
+                
+                var ccart_delete=document.createElement('td');
+                ccart_delete.setAttribute("class","cart_delete");   
+                    var ahref_c6=document.createElement('a');
+                       ahref_c6.setAttribute("class","cart_quantity_delete");
+                       ahref_c6.setAttribute("onclick","deleteRow(this,"+responseTxt[i].product.id+")");
+                       
+                   var i_c6=document.createElement('i');
+                       i_c6.setAttribute("class","fa fa-times");
+                    ahref_c6.appendChild(i_c6);        
+                    ccart_delete.appendChild(ahref_c6);     
+                rproduct_record.appendChild(cproduct);    
+                rproduct_record.appendChild(cproduct_description);    
+                rproduct_record.appendChild(cproduct_price);    
+                rproduct_record.appendChild(corderProduct_quentity);    
+                rproduct_record.appendChild(ctotal_price);    
+                rproduct_record.appendChild(ccart_delete);    
+                tbody.appendChild(rproduct_record);
+            }
+            var count = document.getElementById("tbody").children.length;
+          console.log(" count "+count);
+          if(count===0){
+             var tbody = document.getElementById("tbody");
+             var p_c5=document.createElement('p');
+                        p_c5.setAttribute("class","cart_price"); 
+                        p_c5.setAttribute("style","padding-top: 10px; padding-right: 30px; padding-bottom: 10px; padding-left: 90px;");
+                        p_c5.appendChild(document.createTextNode("NO Product in cart"));
+            tbody.appendChild(p_c5);  
+          }
+
+        }
+   }
+  function cartQuantityUp(id,inStock,price){
+     var quentity=document.getElementById(id).value;
+       quentity++;
+        if(quentity<=inStock &&inStock !==0){
+          
+         AddToCart(id.substring(8, 9),quentity,inStock);
+         console.log("in up"+id.substring(8,9));
+         document.getElementById("p"+id.substring(8,9)).innerHTML="$"+eval(price*quentity);
+         document.getElementById(id).value=quentity;
+      }
+    }
+  function cartQuatityDown(id,inStock,price){
+    var quentity=document.getElementById(id).value; 
+        quentity--;
+        if(quentity>0 && inStock !==0){
+             AddToCart(id.substring(8,9),quentity,inStock);
+             console.log("in down"+id.substring(8, 9));
+             document.getElementById("p"+id.substring(8,9)).innerHTML="$"+eval(price*quentity);
+             document.getElementById(id).value=quentity;
+      }
+  }
+  
+  function deleteRow(row,product_id){
+      var i=row.parentNode.parentNode.rowIndex;
+      console.log("row index "+i+"p "+product_id);
+      console.log(" am here in add to cart  ");
+      document.getElementById('tbody').deleteRow(i-1);
+      romveFromCartFnuction(product_id);  
+      var count = document.getElementById("tbody").children.length;
+      console.log(" count "+count);
+      if(count===0){
+         var tbody = document.getElementById("tbody");
+            var p_c5=document.createElement('p');
+                     p_c5.setAttribute("class","cart_price"); 
+                     p_c5.setAttribute("style","padding-top: 10px; padding-right: 30px; padding-bottom: 10px; padding-left: 90px;");
+                    
+            p_c5.appendChild(document.createTextNode("NO Product in cart"));
+        tbody.appendChild(p_c5);  
+      }
+    }
+  function romveFunCallBack(responseTxt,statusTxt,xhr){
+       if(statusTxt==="success"){
+           console.log(" success  ");
+       }
+  }
+  function AddToCart(product_id,quentity,inStock){
+     if(inStock>= quentity &&inStock !==0 &&checkUserExist()){
+        $.get("AddToCart",{"userId":$('#userId').val(),
+                        "productId":product_id,        
+                        "quentity":quentity    
+                       },romveFunCallBack);
+      
+        }
+  }
+  function romveFromCartFnuction(product_id){
+        $.get("RetrieveFromCart",{"userId":$('#userId').val(),
+                               "productId":product_id        
+                              },romveFunCallBack);
+   }
+  function retrieveFromCart(){
+        $.post("RetrieveFromCart",{"userId":$('#userId').val()
+                                  },submitedfun);
+        console.log(" am here in add to cart  ");
+  } 
+</script>
     </head><!--/head-->
 
     <body>
@@ -48,6 +244,7 @@
                 </div>
                 <div class="table-responsive cart_info">
                     <table class="table table-condensed">
+                        <input id='userId' type='hidden' value='${sessionScope.user.id}'/>  
                         <thead>
                             <tr class="cart_menu">
                                 <td class="image">Item</td>
@@ -58,83 +255,8 @@
                                 <td></td>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/one.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/two.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td class="cart_product">
-                                    <a href=""><img src="images/cart/three.png" alt=""></a>
-                                </td>
-                                <td class="cart_description">
-                                    <h4><a href="">Colorblock Scuba</a></h4>
-                                    <p>Web ID: 1089772</p>
-                                </td>
-                                <td class="cart_price">
-                                    <p>$59</p>
-                                </td>
-                                <td class="cart_quantity">
-                                    <div class="cart_quantity_button">
-                                        <a class="cart_quantity_up" href=""> + </a>
-                                        <input class="cart_quantity_input" type="text" name="quantity" value="1" autocomplete="off" size="2">
-                                        <a class="cart_quantity_down" href=""> - </a>
-                                    </div>
-                                </td>
-                                <td class="cart_total">
-                                    <p class="cart_total_price">$59</p>
-                                </td>
-                                <td class="cart_delete">
-                                    <a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
-                                </td>
-                            </tr>
+                        <tbody id="tbody">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -220,7 +342,7 @@
 
         <!--include the footer of the page-->
 
-        <jsp:include page="footer.jsp.jsp" />
+        <jsp:include page="footer.jsp" />
         <!--end the footer of the page-->
 
 
