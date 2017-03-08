@@ -49,5 +49,7 @@ public interface BusinessLogic {
     public void addCreditCard(double amount);
 
     public User updateUserInfo(User user);
-   // public List
+    // public List
+
+    public void rechargeAccount(User user, long cardNumber);
 }

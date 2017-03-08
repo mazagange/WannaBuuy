@@ -198,7 +198,7 @@ public class Database implements DB {
     }
 
     @Override
-    public void addCredit(User user, int cardNumber) {
+    public void addCredit(User user, long cardNumber) {
 
         try {
             double amountRetrieved = checkCardExistance(cardNumber);

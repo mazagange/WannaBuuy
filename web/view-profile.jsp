@@ -95,7 +95,7 @@
                         <div class="col-sm-4">
                             <div class="signup-form">
                                 <h2>Recharging Account</h2>
-                                <form action="#">
+                                <form action="RechargeAccount" method="GET">
                                     <input type="text" name="creditRecharge" placeholder="Enter credit number" required/>
                                     <button type="submit" class="btn btn-default">Recharge</button>
                                 </form>
