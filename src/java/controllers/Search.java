@@ -5,38 +5,29 @@
  */
 package controllers;
 
-import business.Business;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.math.RoundingMode;
-import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import business.Business;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import model.Product;
 
 /**
  *
- * @author ahmed mohsen
+ * @author ibrahiem
  */
-public class Products extends HttpServlet {
+public class Search extends HttpServlet {
 
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
-    /**
-     * Handles the HTTP <code>GET</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String category = request.getParameter("category");
+        String searchText =request.getParameter("searchText");
         String page = request.getParameter("page");
         if (category == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "category is required");
@@ -46,9 +37,9 @@ public class Products extends HttpServlet {
             }
             int pageNo = Integer.parseInt(page);
             Business business = new Business();
-            List<model.Product> products = business.retriveProducts(category);
+            List<model.Product> products = business.retriveProducts(searchText,category);
             System.out.println(products.size());
-            Stream<Product> stream = products.stream().filter((t) -> t.getStockQuantity() > 0);
+            Stream<Product> stream = products.stream();
             if (pageNo == 1) {
                 stream = stream.limit(12);
             } else {
@@ -68,13 +59,22 @@ public class Products extends HttpServlet {
     }
 
     /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        doGet(request, response);
+    }
+
+    /**
      * Returns a short description of the servlet.
      *
      * @return a String containing servlet description
      */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
-
 }

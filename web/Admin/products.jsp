@@ -36,7 +36,7 @@
         <!--include the header of the page-->
         <!--todo check if the user is logged-in to retrive the logged in header--> 
 
-        <jsp:include page="header.jsp" />
+        <jsp:include page="../header.jsp" />
         <!--end the header of the page-->
 
         <section id="form" style="margin-top: 15px;"><!--form-->
@@ -44,6 +44,7 @@
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
+                            <a href="AddProduct">Add Product</a>
                             <h2>choose category to view the products</h2>
                             <select onchange="showCategory(this)">
                                 <option value="0">select a category</option>
@@ -52,7 +53,7 @@
                                 </c:forEach>
                             </select>
                             <div id="products">
-                                
+
                             </div>
                         </div><!--/login form-->
                     </div>
@@ -84,14 +85,14 @@
 
         <!--include the footer of the page-->
 
-        <jsp:include page="footer.jsp" />
+        <jsp:include page="../footer.jsp" />
         <!--end the footer of the page-->
-        <script src="js/jquery.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.scrollUp.min.js"></script>
-        <script src="js/price-range.js"></script>
-        <script src="js/jquery.prettyPhoto.js"></script>
-        <script src="js/main.js"></script>
+        <script src="../js/jquery.js"></script>
+        <script src="../js/bootstrap.min.js"></script>
+        <script src="../js/jquery.scrollUp.min.js"></script>
+        <script src="../js/price-range.js"></script>
+        <script src="../js/jquery.prettyPhoto.js"></script>
+        <script src="../js/main.js"></script>
         <script>
                                 function showCategory(selectedCategory) {
                                     var selected = selectedCategory.value;
@@ -100,13 +101,20 @@
                                             category: selected
                                         };
                                         $.post("Products", obj, function (data, status, xhr) {
+                                            data
+                                            console.log(data);
                                             var products = document.getElementById("products");
                                             var table = document.createElement("table");
-                                            table.innerHTML = "<tr><th>product name</th><th>price</th><th>quantity</th><th></th></tr>";
-                                            for(i=0;i<data.length;i++){
-                                                table.innerHTML += "<tr><td>"+data[i].name+"</td><td>"+data[i].price+"</td><td>"+data[i].stockQuantity+"</td><td><a href='EditProduct?id="+data[i].id+"'>edit</a> <a href='DeleteProduct?id="+data[i].id+"'>delete</a></td></tr>";
+                                            if (data.length > 0) {
+                                                table.innerHTML = "<tr><th>product name</th><th>price</th><th>quantity</th><th></th></tr>";
+                                                for (i = 0; i < data.length; i++) {
+                                                    table.innerHTML += "<tr><td>" + data[i].name + "</td><td>" + data[i].price + "</td><td>" + data[i].stockQuantity + "</td><td><a href='EditProduct?id=" + data[i].id + "'>edit</a> <a href='DeleteProduct?id=" + data[i].id + "'>delete</a></td></tr>";
+                                                }
+                                                products.appendChild(table);
+                                            }else{
+                                                products.innerHTML = "no products in this category";
                                             }
-                                        });
+                                        }, "json");
                                     }
                                 }
         </script>

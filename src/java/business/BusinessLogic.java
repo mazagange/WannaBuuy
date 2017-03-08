@@ -49,6 +49,8 @@ public interface BusinessLogic {
 
     public void addCreditCard(double amount);
 
+    public User updateUserInfo(User user);
+   // public List
     public boolean addOrder(User user, Order order);
     
     public void updateUser(User user);

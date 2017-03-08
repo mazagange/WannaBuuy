@@ -19,7 +19,12 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class AddCategory extends HttpServlet {
 
-
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        request.getRequestDispatcher("add-category.jsp").forward(request, response);
+    }
    
 
     /**
@@ -33,15 +38,14 @@ public class AddCategory extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
+        
         Business business = new Business();
         String catName = request.getParameter("catName");
         if(business.addCategory(catName)){
-            out.println("Added");
+            response.sendRedirect("Categories?msg=added");
         }else{
-            out.print("notAdded");
+            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
         }
-        out.close();
     }
 
     /**

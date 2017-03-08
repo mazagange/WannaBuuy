@@ -257,7 +257,9 @@ public class Business implements business.BusinessLogic {
             }
         }
     }
-        /*end ibrahiem*/
-
-    
+    public List<Product> retriveProducts(String SearchText,String categoryName) {
+        Database db = Database.getInstance();
+        return db.retriveProducts(categoryName);
     }
+    /*end ibrahiem*/
+}

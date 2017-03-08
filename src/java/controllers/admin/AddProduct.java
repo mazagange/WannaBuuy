@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.io.PrintWriter;
 import static java.lang.System.currentTimeMillis;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.Part;
 import model.Product;
+import model.User;
 
 /**
  *
@@ -26,6 +28,14 @@ import model.Product;
 @MultipartConfig
 public class AddProduct extends HttpServlet {
 
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        Business business = new Business();
+        List<String> categories = business.getCategories();
+        request.setAttribute("categories", categories);
+        request.getRequestDispatcher("add-product.jsp").forward(request, response);
+    }
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -50,26 +60,24 @@ public class AddProduct extends HttpServlet {
         fileName = currentTimeMillis() + fileName;
         final String imageUrl = "Products-images\\" + fileName;
         OutputStream out = null;
-        final PrintWriter writer = response.getWriter();
+        
         try {
             filePart.write(path + fileName);
-            writer.print("New file " + fileName + " created at " + path);
+            
         } catch (FileNotFoundException fne) {
-            writer.print("Error While Uploading Your File");
+            fne.printStackTrace();
         } finally {
             if (out != null) {
                 out.close();
             }
-
-            if (writer != null) {
-                writer.close();
-            }
+            
         }
-
+        
         Business business = new Business();
         business.addProduct(new Product(name, Double.parseDouble(price), desc, imageUrl, Integer.parseInt(stock), category));
+        response.sendRedirect("Products?msg=added");
     }
-
+    
     private String getFileName(final Part part) {
         for (String content : part.getHeader("content-disposition").split(";")) {
             if (content.trim().startsWith("filename")) {

@@ -37,6 +37,12 @@ public class AddCards extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        
+        request.getRequestDispatcher("add-cards.jsp").forward(request, response);
+    }
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -53,6 +59,7 @@ public class AddCards extends HttpServlet {
         double cardAmount = Double.parseDouble(request.getParameter("amount"));
         business.addCreditCard(cardAmount);
         out.close();
+        response.sendRedirect("Cards?msg=added");
     }
 
     /**
