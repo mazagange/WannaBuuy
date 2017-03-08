@@ -24,7 +24,31 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-    </head><!--/head-->
+        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script >
+    var userExist=false;
+    function checkUserExist(){
+     var user = $('#userId').val();
+      if(user !==""){
+        userExist=true;
+       }
+      return userExist;
+     }
+     function addToCart(product_id,quentity){
+        if(quentity>= $("#quantity").val() &&quentity !==0 &&checkUserExist()){
+             $.post("AddToCart",{"userId":$('#userId').val(),
+                                  "productId":product_id,
+                                  "quentity":$("#quantity").val() 
+                                  },submitedfun);
+       console.log(" am here in add to cart  ");
+    }
+    }
+  function submitedfun(responseTxt,statusTxt,xhr){
+      if(statusTxt ==="success"){
+      }
+  }
+</script>
+</head><!--/head-->
 
     <body>
         <header id="header"><!--header-->
@@ -91,7 +115,7 @@
                                     <li><a href=""><i class="fa fa-user"></i> Account</a></li>
                                     <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                                     <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.html"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li>
                                 </ul>
                             </div>
@@ -186,9 +210,10 @@
                                     <img src="images/product-details/rating.png" alt="" />
                                     <span>
                                         <span>${product.price} EGP</span>
-                                        <label>Quantity: ${product.stockQuantity}</label>
-                                        <input type="text" value="3" />
-                                        <button type="button" class="btn btn-fefault cart">
+                                        <label >Quantity: ${product.stockQuantity}</label>
+                                        <input id="quantity" type="text" value="3" />
+                                         <input id='userId' type='hidden' value='${sessionScope.user.id}'/>  
+                                        <button type="button" onclick="addToCart(${product.id},${product.stockQuantity})" id="addToCartBtn" class="btn btn-fefault cart">
                                             <i class="fa fa-shopping-cart"></i>
                                             Add to cart
                                         </button>
