@@ -200,7 +200,7 @@ public class Database implements DB {
     }
 
     @Override
-    public void addCredit(User user, int cardNumber) {
+    public void addCredit(User user, long cardNumber) {
 
         try {
             double amountRetrieved = checkCardExistance(cardNumber);
@@ -653,7 +653,7 @@ public class Database implements DB {
 
         try {
             /*check if record exist befor or not */
- /*  PreparedStatement selectStmt = con.prepareStatement("SELECT * from cart where user_id=? and product_id=?");
+           /*  PreparedStatement selectStmt = con.prepareStatement("SELECT * from cart where user_id=? and product_id=?");
             selectStmt.setInt(1, user.getId());
             selectStmt.setInt(2, product.getId());
             ResultSet result1= selectStmt.executeQuery();

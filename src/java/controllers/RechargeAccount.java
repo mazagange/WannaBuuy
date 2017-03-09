@@ -12,12 +12,13 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
  * @author Israa
  */
-public class ForgetPassword extends HttpServlet {
+public class RechargeAccount extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,23 +41,17 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        String serverName = request.getServerName();
-        int portNumber = request.getServerPort();
-        String contextPath = request.getContextPath();
-        String appUrl = serverName + ":" + portNumber + contextPath;
-        System.out.println(appUrl);
-        String email = request.getParameter("email");
+        // PrintWriter out=response.getWriter();
         Business business = new Business();
-        if (business.forgetPassword(email, appUrl)) {
-            // response.sendRedirect("login.jsp");
-            out.println("Messege sent successfully");
-        } else {
-
-            out.println("Invalid Email!");
-
+        long creditNum = Long.parseLong(request.getParameter("creditRecharge"));
+        User userSession = (User) request.getSession().getAttribute("user");
+        if (userSession != null) {
+            business.rechargeAccount(userSession, creditNum);
         }
+        response.sendRedirect("view-profile.jsp");
 
+        System.out.println("credit value is:" + userSession.getCredit());
+        // out.println("10");
     }
 
     /**

@@ -99,6 +99,10 @@
         <servlet-name>Search</servlet-name>
         <servlet-class>controllers.Search</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RechargeAccount</servlet-name>
+        <servlet-class>controllers.RechargeAccount</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCategory</servlet-name>
         <url-pattern>/AddCategory</url-pattern>
@@ -222,6 +226,10 @@
     <servlet-mapping>
         <servlet-name>AdminHome</servlet-name>
         <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RechargeAccount</servlet-name>
+        <url-pattern>/RechargeAccount</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

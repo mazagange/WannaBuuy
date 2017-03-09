@@ -29,6 +29,34 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
+        <script>
+
+            var req = null;
+            function createXMLHttpRequest() {
+
+                if (window.XMLHttpRequest) {
+                    req = new XMLHttpRequest();
+
+                } else if (window.ActiveXObject) {
+                    req = new ActiveXObject(Microsoft.XMLHTTP);
+                }
+
+            }
+            function forgetPassword() {
+                createXMLHttpRequest();
+                req.onreadystatechange = handleForgetPasswordReq;
+                emailValue = document.getElementById("email").value;
+                req.open("GET", "ForgetPassword?email=" + emailValue, true);
+                req.send(null);
+            }
+            function handleForgetPasswordReq() {
+                if (req.readyState == 4 && req.status == 200) {
+                    document.getElementById("result").value = req.responseText;
+                }
+
+
+            }
+        </script>
     </head><!--/head-->
 
     <body>
@@ -44,13 +72,14 @@
                     <div class="col-sm-8 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
                             <h2>Enter your email and You will receive a Link in your email to Reset password </h2>
-                            <form  method="post" action="ForgetPassword">
+                            <form>
 
 
 
-                                <input type="email" name="email" placeholder="Email Address" />
+                                <input type="email" id="email" placeholder="Email Address" required/>
 
-                                <button type="submit" class="btn btn-default">Reset</button>
+                                <button class="btn btn-default" onclick="forgetPassword(); return false;">Send</button>
+                                <input type="text" id="result" readonly/>
                             </form>
                         </div><!--/login form-->
                     </div>

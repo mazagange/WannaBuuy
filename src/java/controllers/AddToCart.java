@@ -12,22 +12,35 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
- * @author Israa
+ * @author Sama
  */
-public class ForgetPassword extends HttpServlet {
+public class AddToCart extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        try{
+            int userId=Integer.parseInt(request.getParameter("userId"));
+            int productId=Integer.parseInt(request.getParameter("productId"));
+            int quentity=Integer.parseInt(request.getParameter("quentity"));
+            System.out.println("user : "+userId+"product :  "+productId+" quentity  : "+quentity);
+            User userObj= new User();
+            userObj.setId(userId);
+            model.Product productObj=new model.Product();
+            productObj.setId(productId);
+            Business business=new Business();
+            business.addToCart(userObj, productObj, quentity);
+            }finally{
+                out.close();
+            }
+    }
+    
+
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
@@ -40,23 +53,7 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        PrintWriter out = response.getWriter();
-        String serverName = request.getServerName();
-        int portNumber = request.getServerPort();
-        String contextPath = request.getContextPath();
-        String appUrl = serverName + ":" + portNumber + contextPath;
-        System.out.println(appUrl);
-        String email = request.getParameter("email");
-        Business business = new Business();
-        if (business.forgetPassword(email, appUrl)) {
-            // response.sendRedirect("login.jsp");
-            out.println("Messege sent successfully");
-        } else {
-
-            out.println("Invalid Email!");
-
-        }
-
+        processRequest(request, response);
     }
 
     /**
@@ -70,7 +67,7 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
+        processRequest(request, response);
     }
 
     /**

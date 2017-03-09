@@ -55,7 +55,7 @@ public interface DB {
 
     public void addCard(CreditCard creditCard, int numberOfCards);
 
-    public void addCredit(User user, int cardNumber);
+    public void addCredit(User user, long cardNumber);
 
     public List<OrderProduct> retriveCart(User user);
 
