@@ -5,13 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>E-Shopper</title>
-    </head>
-    <body>
+
         <header id="header"><!--header-->
 
 
@@ -20,7 +14,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="logo pull-left">
-                                <a href="index.jsp"><img src="../images/home/logo.png" alt="" /></a>
+                                <a href=".."><img src="../images/home/logo.png" alt="" /></a>
                             </div>
 
                         </div>
@@ -76,5 +70,4 @@
                 </div>
 
             </div><!--/header-bottom-->
-        </header><!--/header-->    </body>
-</html>
+        </header><!--/header--> 

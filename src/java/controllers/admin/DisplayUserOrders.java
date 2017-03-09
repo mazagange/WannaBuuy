@@ -41,6 +41,7 @@ public class DisplayUserOrders extends HttpServlet {
         } else {
             Business business = new Business();
             List<Order> orders = business.retriveOrders(Integer.parseInt(userId));
+            System.out.println(orders.size());
             request.setAttribute("orders", orders);
             request.getRequestDispatcher("display-orders.jsp").forward(request, response);
         }

@@ -48,9 +48,9 @@
 
 
 
-                                <input type="number" min="50" name="amount" placeholder="Please enter your card amount" />
-                                <input type="number" min="1" name="number" placeholder="Please Number of generated cards" />
-                                <button type="submit" class="btn btn-default">Submit</button>
+                                <input type="number" min="50" name="amount" placeholder="Please enter your card amount" required />
+                                <input type="number" min="1" name="number" placeholder="Please Number of generated cards" required/>
+                                <button type="submit" class="btn btn-default">Generate Cards</button>
                             </form>
                         </div><!--/login form-->
                     </div>

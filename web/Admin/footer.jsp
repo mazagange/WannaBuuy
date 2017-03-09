@@ -5,13 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title></title>
-    </head>
-    <body>
+
 
         <footer id="footer" style="position: fixed;bottom: 0; width: 100%;text-align: center;"><!--Footer-->
             <!--		<div class="footer-top">
@@ -172,5 +166,4 @@
             </div>
 
         </footer><!--/Footer-->
-    </body>
-</html>
+

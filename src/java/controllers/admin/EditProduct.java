@@ -71,9 +71,10 @@ public class EditProduct extends HttpServlet {
         String desc = request.getParameter("desc");
         String category = request.getParameter("category");
         String stock = request.getParameter("stock");
+        String oldImage = request.getParameter("img");
         System.out.println(desc);
         String imageUrl;
-        if (request.getPart("image") != null) {
+        if (request.getPart("image").getSize() > 0) {
             String path = request.getServletContext().getRealPath("");
             path = path + "Products-images\\";
             final Part filePart = request.getPart("image");
@@ -94,7 +95,7 @@ public class EditProduct extends HttpServlet {
 
             }
         }else{
-            imageUrl = request.getParameter("img");
+            imageUrl = oldImage;
         }
         Business business = new Business();
         Product product = new Product(name, Double.parseDouble(price), desc, imageUrl, Integer.parseInt(stock), category);

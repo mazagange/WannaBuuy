@@ -41,7 +41,7 @@
     </servlet>
     <servlet>
         <servlet-name>Products</servlet-name>
-        <servlet-class>controllers.Products</servlet-class>
+        <servlet-class>controllers.R</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForgetPassword</servlet-name>
@@ -137,6 +137,10 @@
     </servlet-mapping>
     <error-page>
         <error-code>400</error-code>
+        <location>/404.html</location>
+    </error-page>
+    <error-page>
+    <error-code>404</error-code>
         <location>/404.html</location>
     </error-page>
     <servlet-mapping>

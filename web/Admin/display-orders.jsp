@@ -42,48 +42,32 @@
         <section id="form" style="margin-top: 15px;"><!--form-->
             <div class="container">
                 <div class="row">
-                    <div class="col-sm-4 col-sm-offset-1">
+                    <div class="col-sm-8 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
                             <h2>orders</h2>
                             <c:if test="${empty orders}">
                                 <h1>no orders </h1>
                             </c:if>
                             <c:forEach items="${orders}" var="order">
+                                <div style="margin: 10px; border: #ff9933 solid 3px; padding: 10px; border-radius: 10px; ">
                                 <h4>order ID : ${order.id}</h4>
                                 <c:set var="total" value="0" scope="page"/>
-                                <table>
+                                <table class="table" style="width: 100%; margin-top: 10px">
                                     <tr><th>product</th><th>quantity</th><th>total price</th></tr>
                                     <c:forEach items="${order.orderDetails}" var="orderDetails">
-                                    <tr><td>${orderDetails.product.name}</td><td>${orderDetails.quantity}</td><td>${orderDetails.product.price * orderDetails.quantity}</td></tr>
+                                    <tr><td>${orderDetails.product.name}</td><td>${orderDetails.quantity}</td><td>${orderDetails.product.price * orderDetails.quantity} EGP</td></tr>
                                     <c:set var="total" value="${total+(orderDetails.product.price * orderDetails.quantity)}" scope="page"/>
                                     </c:forEach>
                                 </table>
-                                <h4>order total : ${total}</h4>
+                                <h4>order total : ${total} EGP</h4>
+                                </div>
                             </c:forEach>
                         </div><!--/login form-->
                     </div>
                     <!--                    <div class="col-sm-1">
                                             <h2 class="or">OR</h2>
                                         </div>-->
-                    <div class="col-sm-4">
-                        <!--                        <div class="signup-form">sign up form
-                                                    <h2>New User Signup!</h2>
-                                                    <form action="#">
-                                                        <input type="text" name="fName" placeholder="first Name" required/>
-                                                        <input type="text" name="lName" placeholder="last Name" required/>
-                        
-                        
-                                                        <input type="email" name="email" placeholder="Email Address" required />
-                                                        <input type="password" name="pass" placeholder="Password" required/>
-                                                        <input type="text" name="city" placeholder="City" required/>
-                                                        <input type="text" name="country" placeholder=" Country" required/>
-                                                        <input type="text" name="address" placeholder="Address" required/>
-                                                        <input type="tel" name="phone" placeholder="Phone" required/>
-                                                        <input type="number" name="zip" placeholder="Postal code" required />
-                                                        <button type="submit" class="btn btn-default">Signup</button>
-                                                    </form>
-                                                </div>/sign up form-->
-                    </div>
+                    
                 </div>
             </div>
         </section><!--/form-->

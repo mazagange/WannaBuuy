@@ -46,7 +46,7 @@
                         <div class="login-form"><!--login form-->
                             <h2>users</h2>
 
-                            <table>
+                            <table class="table" style="width: 100%; margin-top: 10px">
                                 <tr><th>name</th><th>credit</th></tr>
                                 <c:forEach items="${users}" var="user">
                                     <tr><td><a href="DisplayUserOrders?id=${user.id}">${user.firstName} ${user.lastName}</a></td><td>${user.credit}</td></tr>

@@ -45,11 +45,11 @@
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
                             <h2>Categories</h2>
-                            <a href="AddCategory">Add category</a>
-                            <table>
-                                <tr><th>Category  name</th><th></th></tr>
+                            <button onclick="location.href='AddCategory';" class="btn btn-default">Add category</button>
+                            <table class="table" style="width: 100%; margin-top: 10px">
+                                <tr><th>Category</th><th></th></tr>
                                 <c:forEach items="${categories}" var="cat">
-                                    <tr><td>${cat}</td><td><a href="DeleteCategory?name=${cat}">delete</a></td></tr>
+                                    <tr><td>${cat}</td><td><a href="DeleteCategory?name=${cat}"><span class="glyphicon glyphicon-remove"></span></a></td></tr>
                                 </c:forEach>
                             </table>
                         </div><!--/login form-->

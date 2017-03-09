@@ -45,12 +45,12 @@
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
                             <h2>cards</h2>
-                            <a href="AddCards">Add Cards</a>
-                            <table>
+                            <button onclick="location.href='AddCards';" class="btn btn-default">Add Cards</button>
+                            <table class="table" style="width: 100%; margin-top: 10px">
                                 <tr><th>number</th><th>amount</th><th></th></tr>
                                 <c:forEach items="${cards}" var="card">
                                     <c:if test="${!card.printed}">
-                                    <tr><td>${card.number}</td><td>${card.amount}</td><td><a href="PrintCard?id=${card.number}">print</a></td></tr>
+                                    <tr><td>${card.number}</td><td>${card.amount}</td><td><a href="PrintCard?id=${card.number}"><span class="glyphicon glyphicon-print"></span></a></td></tr>
                                     </c:if>
                                 </c:forEach>
                             </table>
@@ -61,7 +61,7 @@
                                         </div>-->
                     <div class="col-sm-4">
                         <h2>printed cards</h2>
-                        <table>
+                        <table class="table" style="width: 100%; margin-top: 10px">
                             <tr><th>number</th><th>amount</th></tr>
                                 <c:forEach items="${cards}" var="card">
                                     <c:if test="${card.printed}">
