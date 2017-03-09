@@ -40,6 +40,22 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        PrintWriter out = response.getWriter();
+        String serverName = request.getServerName();
+        int portNumber = request.getServerPort();
+        String contextPath = request.getContextPath();
+        String appUrl = serverName + ":" + portNumber + contextPath;
+        System.out.println(appUrl);
+        String email = request.getParameter("email");
+        Business business = new Business();
+        if (business.forgetPassword(email, appUrl)) {
+            // response.sendRedirect("login.jsp");
+            out.println("Messege sent successfully");
+        } else {
+
+            out.println("Invalid Email!");
+
+        }
 
     }
 
@@ -54,15 +70,7 @@ public class ForgetPassword extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String serverName = request.getServerName();
-        int portNumber = request.getServerPort();
-        String contextPath = request.getContextPath();
-        String appUrl = serverName + ":" + portNumber + contextPath;
-        System.out.println(appUrl);
-        String email = request.getParameter("email");
-        Business business = new Business();
-        business.forgetPassword(email, appUrl);
-        response.sendRedirect("login.jsp");
+
     }
 
     /**

@@ -58,7 +58,13 @@ public class Business implements business.BusinessLogic {
         Database db = Database.getInstance();
         boolean confirmEmail = db.confirmEmail(email, token);
         if (confirmEmail) {
-            Mailer.send(email, "welcome to wannabuy", "welcome to wannabuy");
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Mailer.send(email, "welcome to wannabuy", "welcome to wannabuy");
+                }
+            }).start();
+
         }
         return confirmEmail;
     }
@@ -121,7 +127,13 @@ public class Business implements business.BusinessLogic {
         String token = UUID.randomUUID().toString();
         boolean addUser = db.addUser(user, token);
         String msg = "please click on this link to confirm your mail <br/> <a href='http://" + appUrl + "/Confirm?email=" + user.getEmail() + "&token=" + token + "'>click here to confirm</a><br/><br/>Wannabuy";
-        Mailer.send(user.getEmail(), "confirmation mail Wanna buy", msg);
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                Mailer.send(user.getEmail(), "confirmation mail Wanna buy", msg);
+            }
+        }).start();
+
         return addUser;
     }
 
@@ -143,7 +155,13 @@ public class Business implements business.BusinessLogic {
             Timestamp expiratinDate = new Timestamp(date.getTime());
             db.forgetPassword(email, passwordToken, expiratinDate);
             String msg = "please click on this link to reset your password  <br/> <a href='http://" + appUrl + "/ResetPassword?email=" + email + "&passwordToken=" + passwordToken + "'>click here to reset your password</a><br/><br/>Wannabuy";
-            Mailer.send(email, "Reset Password mail Wanna buy", msg);
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    Mailer.send(email, "Reset Password mail Wanna buy", msg);
+                }
+            }).start();
+
             return true;
         } else {
             return false;
@@ -232,18 +250,19 @@ public class Business implements business.BusinessLogic {
     public boolean cartExsits(User user, Product product) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-@Override
+
+    @Override
     public boolean addOrder(User user, Order order) {
-         Database db = Database.getInstance();
-         db.addOrder(user,order);
-    
+        Database db = Database.getInstance();
+        db.addOrder(user, order);
+
         return true;
-     }
+    }
 
     @Override
     public void updateUser(User user) {
-         Database db = Database.getInstance();
-         db.updateUser(user);
+        Database db = Database.getInstance();
+        db.updateUser(user);
     }
 
     /*end asmaa*/
