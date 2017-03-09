@@ -52,8 +52,8 @@
         <servlet-class>controllers.admin.Products</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminCatergories</servlet-name>
-        <servlet-class>controllers.admin.Catergories</servlet-class>
+        <servlet-name>AdminCategories</servlet-name>
+        <servlet-class>controllers.admin.Categories</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminUsers</servlet-name>
@@ -105,11 +105,11 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>AddCategory</servlet-name>
-        <url-pattern>/AddCategory</url-pattern>
+        <url-pattern>/Admin/AddCategory</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddProduct</servlet-name>
-        <url-pattern>/AddProduct</url-pattern>
+        <url-pattern>/Admin/AddProduct</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -148,8 +148,8 @@
         <url-pattern>/Admin/Products</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdminCatergories</servlet-name>
-        <url-pattern>/Admin/Catergories</url-pattern>
+        <servlet-name>AdminCategories</servlet-name>
+        <url-pattern>/Admin/Categories</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminUsers</servlet-name>
@@ -225,7 +225,7 @@
     </error-page>
     <servlet-mapping>
         <servlet-name>AdminHome</servlet-name>
-        <url-pattern>/Admin</url-pattern>
+        <url-pattern>/Admin/</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>RechargeAccount</servlet-name>

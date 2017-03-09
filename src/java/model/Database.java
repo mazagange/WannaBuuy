@@ -30,7 +30,7 @@ public class Database implements DB {
 
     final static String URL = "jdbc:mysql://localhost/wannabuy";
     final static String USER = "root";
-    final static String PASS = "root";
+    final static String PASS = "";
     private Connection con;
 
     private Database() {
@@ -588,7 +588,7 @@ public class Database implements DB {
     public List<User> retriveUsers() {
         List<User> users = new ArrayList<>();
         try {
-            PreparedStatement select = con.prepareStatement("SELECT user_id, email,fname, lname,city, zip,phone,country,registration_date,address,credite  FROM product LEFT JOIN productcategory ON product.product_category=productcategory.category_id");
+            PreparedStatement select = con.prepareStatement("SELECT user_id, email,fname, lname,city, zip,phone,country,registration_date,address,credite FROM user");
             ResultSet rs = select.executeQuery();
             while (rs.next()) {
                 User user = new User();
@@ -613,10 +613,10 @@ public class Database implements DB {
         return users;
     }
 
-    public void printCard(int cardId) {
+    public void printCard(long cardId) {
         try {
-            PreparedStatement update = con.prepareStatement("update creditcard set printed= '1' where creditCard_id = ?");
-            update.setInt(1, cardId);
+            PreparedStatement update = con.prepareStatement("update creditcard set printed= '1' where number = ?");
+            update.setLong(1, cardId);
             update.executeUpdate();
         } catch (SQLException e) {
             // TODO Auto-generated catch block

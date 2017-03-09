@@ -48,8 +48,8 @@
 
                             <table>
                                 <tr><th>name</th><th>credit</th></tr>
-                                        <c:forEach items="${users}" var="user">
-                                    <tr><td><a href="DisplayUserOrders?id=${user.id}">${user.fname} ${user.lname}</a></td><td>${user.credit}</td></tr>
+                                <c:forEach items="${users}" var="user">
+                                    <tr><td><a href="DisplayUserOrders?id=${user.id}">${user.firstName} ${user.lastName}</a></td><td>${user.credit}</td></tr>
                                 </c:forEach>
                             </table>
 

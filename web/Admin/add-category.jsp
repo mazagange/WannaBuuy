@@ -22,25 +22,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="../images/ico/apple-touch-icon-57-precomposed.png">
-        <script>
-            function addCategory() {
-                var catName = document.getElementById("catName").value;
-                var obj = {
-                    catName: catName
-                };
-                $.post("AddCategory", obj,function(data, status, xhr){
-                    console.log(data);
-                    if(data == "Added"){
-                        document.getElementById("catName").value = "";
-                    }else{
-                        
-                    }
-                });
-                return false;
-            }
-            
-            
-        </script>
+        
     </head><!--/head-->
 
     <body>
@@ -52,10 +34,9 @@
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--Category form-->
                             <h2>Adding New Category</h2>
-                            <form >
-                                <input id="catName" type="text" placeholder="Category Name" required />
-
-                                <button type="submit" onclick="return addCategory()" class="btn btn-default">Add</button>
+                            <form method="post" action="AddCategory">
+                                <input name="catName" type="text" placeholder="Category Name" required />
+                                <button type="submit"  class="btn btn-default">Add</button>
                             </form>
                         </div><!--/login form-->
                     </div>

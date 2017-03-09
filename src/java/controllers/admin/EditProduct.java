@@ -14,6 +14,7 @@ import static java.lang.System.currentTimeMillis;
 import java.util.List;
 import javafx.scene.chart.BubbleChart;
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +25,7 @@ import model.Product;
  *
  * @author ahmed mohsen
  */
+@MultipartConfig
 public class EditProduct extends HttpServlet {
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +64,9 @@ public class EditProduct extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
         String name = request.getParameter("name");
+        System.out.println(name);
         String price = request.getParameter("price");
         String desc = request.getParameter("desc");
         String category = request.getParameter("category");
@@ -93,7 +97,10 @@ public class EditProduct extends HttpServlet {
             imageUrl = request.getParameter("img");
         }
         Business business = new Business();
-        business.updateProduct(new Product(name, Double.parseDouble(price), desc, imageUrl, Integer.parseInt(stock), category));
+        Product product = new Product(name, Double.parseDouble(price), desc, imageUrl, Integer.parseInt(stock), category);
+        product.setId(id);
+        business.updateProduct(product);
+        response.sendRedirect("Products?msg=edited");
     }
 
     /**

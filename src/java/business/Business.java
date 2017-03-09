@@ -109,7 +109,7 @@ public class Business implements business.BusinessLogic {
         return db.retriveCards();
     }
 
-    public void printCard(int cardId) {
+    public void printCard(long cardId) {
         Database db = Database.getInstance();
         db.printCard(cardId);
     }

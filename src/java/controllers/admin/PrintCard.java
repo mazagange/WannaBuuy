@@ -38,7 +38,7 @@ public class PrintCard extends HttpServlet {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "no card id");
         } else {
             Business business = new Business();
-            business.printCard(Integer.parseInt(cardId));
+            business.printCard(Long.parseLong(cardId));
             response.sendRedirect("Cards");
         }
     }

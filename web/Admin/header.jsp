@@ -43,12 +43,11 @@
                             </div>
                             <div class="mainmenu pull-left">
                                 <ul class="nav navbar-nav collapse navbar-collapse">
-                                    <li><a href="AdminHome.jsp" class="active">Home</a></li>
-                                    <li><a href="add-cards.jsp" class="active">Cards</a></li> 
-                                    <li><a href="add-category.jsp" class="active">Categories</a></li>
-                                    <li><a href="add-product.jsp" class="active">Products</a></li>
-                                    <li><a href="cards.jsp" class="active">Print Card</a></li>
-
+                                    <li><a href="../Admin" class="active">Home</a></li>
+                                    <li><a href="Cards" class="active">Cards</a></li> 
+                                    <li><a href="Categories" class="active">Categories</a></li>
+                                    <li><a href="Products" class="active">Products</a></li>
+                                    <li><a href="Users" class="active">Users</a></li>
                                 </ul>
                             </div>
                         </div>

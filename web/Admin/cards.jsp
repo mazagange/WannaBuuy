@@ -47,10 +47,10 @@
                             <h2>cards</h2>
                             <a href="AddCards">Add Cards</a>
                             <table>
-                                <tr><th>number</th><th>amount</th></tr>
+                                <tr><th>number</th><th>amount</th><th></th></tr>
                                 <c:forEach items="${cards}" var="card">
-                                    <c:if test="${card.printed}">
-                                    <tr><td>${card.number}</td><td>${card.amount}</td></tr>
+                                    <c:if test="${!card.printed}">
+                                    <tr><td>${card.number}</td><td>${card.amount}</td><td><a href="PrintCard?id=${card.number}">print</a></td></tr>
                                     </c:if>
                                 </c:forEach>
                             </table>
@@ -62,10 +62,10 @@
                     <div class="col-sm-4">
                         <h2>printed cards</h2>
                         <table>
-                                <tr><th>number</th><th>amount</th></tr>
+                            <tr><th>number</th><th>amount</th></tr>
                                 <c:forEach items="${cards}" var="card">
-                                    <c:if test="${!card.printed}">
-                                    <tr><td>${card.number}</td><td>${card.amount}</td></tr>
+                                    <c:if test="${card.printed}">
+                                <tr><td>${card.number}</td><td>${card.amount}</td></tr>
                                     </c:if>
                                 </c:forEach>
                             </table>

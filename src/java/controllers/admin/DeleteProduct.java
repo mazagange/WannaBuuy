@@ -39,7 +39,7 @@ public class DeleteProduct extends HttpServlet {
         } else {
             Business business = new Business();
             business.deleteProduct(Integer.parseInt(productId));
-            response.sendRedirect("Product?msg=deleted");
+            response.sendRedirect("Products?msg=deleted");
         }
     }
 
