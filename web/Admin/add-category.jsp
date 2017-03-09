@@ -36,7 +36,7 @@
                             <h2>Adding New Category</h2>
                             <form method="post" action="AddCategory">
                                 <input name="catName" type="text" placeholder="Category Name" required />
-                                <button type="submit"  class="btn btn-default">Add</button>
+                                <button type="submit"  class="btn btn-default">Add Category</button>
                             </form>
                         </div><!--/login form-->
                     </div>
