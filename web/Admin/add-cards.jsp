@@ -35,7 +35,7 @@
         <!--include the header of the page-->
         <!--todo check if the user is logged-in to retrive the logged in header--> 
 
-        <jsp:include page="../header.jsp" />
+        <jsp:include page="header.jsp" />
         <!--end the header of the page-->
 
         <section id="form" style="margin-top: 15px;"><!--form-->
@@ -82,7 +82,7 @@
 
         <!--include the footer of the page-->
 
-        <jsp:include page="../footer.jsp" />
+        <jsp:include page="footer.jsp" />
         <!--end the footer of the page-->
 
 

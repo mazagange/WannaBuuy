@@ -13,7 +13,7 @@
     </head>
     <body>
 
-        <footer id="footer" style="position: relative;bottom: 0; width: 100%;text-align: center;"><!--Footer-->
+        <footer id="footer" style="position: fixed;bottom: 0; width: 100%;text-align: center;"><!--Footer-->
             <!--		<div class="footer-top">
                                     <div class="container">
                                             <div class="row">

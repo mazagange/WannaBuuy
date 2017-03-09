@@ -164,7 +164,7 @@ public class Database implements DB {
             PreparedStatement pst = con.prepareStatement("insert into creditcard(amonut,number) values(?,?)");
             for (int i = 0; i < numberOfCards; i++) {
                 pst.setDouble(1, creditCard.getAmount());
-                pst.setLong(2, creditCard.getNumber());
+                pst.setLong(2, numbGen());
                 pst.executeUpdate();
             }
             pst.close();
@@ -653,7 +653,7 @@ public class Database implements DB {
 
         try {
             /*check if record exist befor or not */
-           /*  PreparedStatement selectStmt = con.prepareStatement("SELECT * from cart where user_id=? and product_id=?");
+ /*  PreparedStatement selectStmt = con.prepareStatement("SELECT * from cart where user_id=? and product_id=?");
             selectStmt.setInt(1, user.getId());
             selectStmt.setInt(2, product.getId());
             ResultSet result1= selectStmt.executeQuery();
@@ -815,6 +815,15 @@ public class Database implements DB {
             e.printStackTrace();
         }
         return products;
+    }
+
+    public static long numbGen() {
+        while (true) {
+            long numb = (long) (Math.random() * 100000000 * 1000000); // had to use this as int's are to small for a 10 digit number.
+            if (String.valueOf(numb).length() == 14) {
+                return numb;
+            }
+        }
     }
     /*end ibrahiem*/
 }

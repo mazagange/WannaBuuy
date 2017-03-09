@@ -41,37 +41,11 @@
 
         <section id="form" style="margin-top: 15px;"><!--form-->
             <div class="container">
-                <div class="row">
-                    <div class="col-sm-4 col-sm-offset-1">
-                        <div class="login-form"><!--login form-->
-                            
-
-                        </div><!--/login form-->
-                    </div>
-                    <!--                    <div class="col-sm-1">
-                                            <h2 class="or">OR</h2>
-                                        </div>-->
-                    <div class="col-sm-4">
-                        <!--                        <div class="signup-form">sign up form
-                                                    <h2>New User Signup!</h2>
-                                                    <form action="#">
-                                                        <input type="text" name="fName" placeholder="first Name" required/>
-                                                        <input type="text" name="lName" placeholder="last Name" required/>
-                        
-                        
-                                                        <input type="email" name="email" placeholder="Email Address" required />
-                                                        <input type="password" name="pass" placeholder="Password" required/>
-                                                        <input type="text" name="city" placeholder="City" required/>
-                                                        <input type="text" name="country" placeholder=" Country" required/>
-                                                        <input type="text" name="address" placeholder="Address" required/>
-                                                        <input type="tel" name="phone" placeholder="Phone" required/>
-                                                        <input type="number" name="zip" placeholder="Postal code" required />
-                                                        <button type="submit" class="btn btn-default">Signup</button>
-                                                    </form>
-                                                </div>/sign up form-->
-                    </div>
+                <div class="row" style="text-align: center;margin-top: 10%">
+                    <h1>Welcome To the Admin Panel </h1>
                 </div>
             </div>
+
         </section><!--/form-->
 
         <!--include the footer of the page-->

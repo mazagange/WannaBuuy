@@ -270,17 +270,9 @@ public class Business implements business.BusinessLogic {
     @Override
     public void addCreditCard(double amount, int numberOfCards) {
         Database db = Database.getInstance();
-        db.addCard(new CreditCard(numbGen(), amount), numberOfCards);
+        db.addCard(new CreditCard(0, amount), numberOfCards);
     }
 
-    public static long numbGen() {
-        while (true) {
-            long numb = (long) (Math.random() * 100000000 * 1000000); // had to use this as int's are to small for a 10 digit number.
-            if (String.valueOf(numb).length() == 10) {
-                return numb;
-            }
-        }
-    }
 
     public List<Product> retriveProducts(String SearchText, String categoryName) {
         Database db = Database.getInstance();
