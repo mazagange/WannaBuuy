@@ -571,7 +571,7 @@ public class Database implements DB {
                 ResultSet rs2 = select2.executeQuery();
                 while (rs2.next()) {
 
-                    orderProducts.add(new OrderProduct(new Product(rs.getString(2), rs.getDouble(3), rs.getString(4), rs.getString(5), rs.getInt(6), ""), rs.getInt(7)));
+                    orderProducts.add(new OrderProduct(new Product(rs2.getString(2), rs2.getDouble(3), rs2.getString(4), rs2.getString(5), rs2.getInt(6), ""), rs2.getInt(7)));
                 }
                 rs2.close();
                 order.setOrderDetails(orderProducts);

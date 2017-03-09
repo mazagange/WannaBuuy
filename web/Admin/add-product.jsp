@@ -63,7 +63,7 @@
                         </div><!--/login form-->
                     </div>
                     <div class="col-sm-1">
-                        <h2 class="or">and</h2>
+                        
                     </div>
                     <div class="col-sm-4">
                         <div class="signup-form"><!--sign up form-->

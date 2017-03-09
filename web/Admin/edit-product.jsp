@@ -53,7 +53,7 @@
                                 </select>
 
                                 <input type='file' name="image" accept="image/*" onchange="readURL(this);" style="background: none"/>
-                                <input type="hidden" name="id" value="${product.id}"
+                                <input type="hidden" name="id" value="${product.id}"/>
                                 <input type="hidden" name="img" value="${product.image}"/>
                                 
                                 <input type="submit"  class="btn btn-default" value="Save Product"/>
@@ -68,7 +68,7 @@
                         </div><!--/login form-->
                     </div>
                     <div class="col-sm-1">
-                        <h2 class="or">and</h2>
+                        
                     </div>
                     <div class="col-sm-4">
                         <div class="signup-form"><!--sign up form-->
