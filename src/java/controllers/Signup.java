@@ -55,9 +55,11 @@ public class Signup extends HttpServlet {
         System.out.println(appUrl);
         boolean addUser = business.addUser(new User(0, email, pass, fName, lName, city, country, address, phone, false, Integer.parseInt(zip),new Date() , 0),appUrl);
         if(addUser){
-            response.sendRedirect("login.jsp?signedup=true");
+            request.setAttribute("signedup", "true");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }else{
-            response.sendRedirect("login.jsp?error=signup");
+            request.setAttribute("error", "signup");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
         
     }

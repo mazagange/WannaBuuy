@@ -44,6 +44,16 @@
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
+                            <c:if test="${param.msg == 'added'}">
+                                <div class="alert alert-success">
+                                    <strong>!</strong> Category Added successfully
+                                </div>
+                            </c:if>
+                            <c:if test="${param.msg == 'exist'}">
+                                <div class="alert alert-warning">
+                                    <strong>!</strong> category is exist
+                                </div>
+                            </c:if>
                             <h2>Categories</h2>
                             <button onclick="location.href='AddCategory';" class="btn btn-default">Add category</button>
                             <table class="table" style="width: 100%; margin-top: 10px">

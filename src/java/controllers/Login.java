@@ -42,11 +42,13 @@ public class Login extends HttpServlet {
                 session.setAttribute("user", user);
                 response.sendRedirect("index.jsp");
             }else{
-                response.sendRedirect("login.jsp?error=confirm");
+                request.setAttribute("error", "confirm");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
 
         } else {
-            response.sendRedirect("login.jsp?error=login");
+            request.setAttribute("error", "login");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
 
     }

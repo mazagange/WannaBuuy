@@ -44,6 +44,16 @@
                 <div class="row">
                     <div class="col-sm-8 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
+                            <c:if test="${param.msg == 'added'}">
+                                <div class="alert alert-success">
+                                    <strong>product Added successfully</strong> 
+                                </div>
+                            </c:if>
+                            <c:if test="${param.msg == 'edited'}">
+                                <div class="alert alert-success">
+                                    <strong>product edited successfully</strong> 
+                                </div>
+                            </c:if>
                             <button onclick="location.href='AddProduct';" class="btn btn-default">Add Product</button>
                             
                             <h2>choose category to view the products</h2>

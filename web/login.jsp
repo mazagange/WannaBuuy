@@ -4,6 +4,7 @@
     Author     : ibrahiem
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,6 +45,16 @@
                 <div class="row">
                     <div class="col-sm-4 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
+                            <c:if test="${requestScope.error == 'login'}">
+                                <div class="alert alert-warning">
+                                    <strong>!</strong> error in Email or password 
+                                </div>
+                            </c:if>
+                            <c:if test="${requestScope.error == 'confirm'}">
+                                <div class="alert alert-warning">
+                                    <strong>!</strong> please confirm your email first
+                                </div>
+                            </c:if>
                             <h2>Login to your account</h2>
                             <form action="Login" method="post">
 
@@ -66,6 +77,16 @@
                     </div>
                     <div class="col-sm-4">
                         <div class="signup-form"><!--sign up form-->
+                            <c:if test="${requestScope.signedup == 'true'}">
+                                <div class="alert alert-success">
+                                    <strong>successful please confirm your email </strong> 
+                                </div>
+                            </c:if>
+                            <c:if test="${requestScope.error == 'signup'}">
+                                <div class="alert alert-warning">
+                                    <strong>!</strong> this email is registered before
+                                </div>
+                            </c:if>
                             <h2>New User Signup!</h2>
                             <form action="Signup" method="post">
                                 <input type="text" name="fName" placeholder="first Name" required/>
