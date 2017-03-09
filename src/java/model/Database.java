@@ -30,7 +30,7 @@ public class Database implements DB {
 
     final static String URL = "jdbc:mysql://localhost/wannabuy";
     final static String USER = "root";
-    final static String PASS = "";
+    final static String PASS = "root";
     private Connection con;
 
     private Database() {
@@ -159,12 +159,14 @@ public class Database implements DB {
     }
 
     @Override
-    public void addCard(CreditCard creditCard) {
+    public void addCard(CreditCard creditCard, int numberOfCards) {
         try {
             PreparedStatement pst = con.prepareStatement("insert into creditcard(amonut,number) values(?,?)");
-            pst.setDouble(1, creditCard.getAmount());
-            pst.setLong(2, creditCard.getNumber());
-            pst.executeUpdate();
+            for (int i = 0; i < numberOfCards; i++) {
+                pst.setDouble(1, creditCard.getAmount());
+                pst.setLong(2, creditCard.getNumber());
+                pst.executeUpdate();
+            }
             pst.close();
         } catch (SQLException ex) {
             ex.printStackTrace();

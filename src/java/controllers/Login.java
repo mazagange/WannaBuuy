@@ -40,7 +40,7 @@ public class Login extends HttpServlet {
             if (user.isEmailConfirmed()) {
                 HttpSession session = request.getSession(true);
                 session.setAttribute("user", user);
-                response.sendRedirect("home.jsp");
+                response.sendRedirect("index.jsp");
             }else{
                 response.sendRedirect("login.jsp?error=confirm");
             }

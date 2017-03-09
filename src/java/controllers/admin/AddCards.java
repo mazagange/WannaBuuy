@@ -40,9 +40,10 @@ public class AddCards extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         request.getRequestDispatcher("add-cards.jsp").forward(request, response);
     }
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -57,9 +58,10 @@ public class AddCards extends HttpServlet {
         PrintWriter out = response.getWriter();
         Business business = new Business();
         double cardAmount = Double.parseDouble(request.getParameter("amount"));
-        business.addCreditCard(cardAmount);
-        out.close();
+        int numberOfCards = Integer.parseInt(request.getParameter("number"));
+        business.addCreditCard(cardAmount, numberOfCards);
         response.sendRedirect("Cards?msg=added");
+        out.close();
     }
 
     /**

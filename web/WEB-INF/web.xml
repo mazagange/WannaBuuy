@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>LoginFilter</filter-name>
+        <filter-class>controllers.LoginFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>LoginFilter</filter-name>
+        <servlet-name>EditProfile</servlet-name>
+        <url-pattern>/edit-profile.jsp</url-pattern>
+        <url-pattern>/view-profile.jsp</url-pattern>
+        <url-pattern>/checkout.jsp</url-pattern>
+        <url-pattern>/cart.jsp</url-pattern>
+        <dispatcher>REQUEST</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>INCLUDE</dispatcher>
+    </filter-mapping>
     <servlet>
         <servlet-name>AddCategory</servlet-name>
         <servlet-class>controllers.admin.AddCategory</servlet-class>
@@ -175,6 +190,30 @@
     <servlet-mapping>
         <servlet-name>AdminAddCards</servlet-name>
         <url-pattern>/Admin/AddCards</url-pattern>
+    </servlet-mapping>
+      <servlet>
+        <servlet-name>RetrieveFromCart</servlet-name>
+        <servlet-class>controllers.RetrieveFromCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddToCart</servlet-name>
+        <servlet-class>controllers.AddToCart</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShippingOrder</servlet-name>
+        <servlet-class>controllers.ShippingOrder</servlet-class>
+    </servlet>
+  <servlet-mapping>
+        <servlet-name>RetrieveFromCart</servlet-name>
+        <url-pattern>/RetrieveFromCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddToCart</servlet-name>
+        <url-pattern>/AddToCart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShippingOrder</servlet-name>
+        <url-pattern>/ShippingOrder</url-pattern>
     </servlet-mapping>
     <error-page>
         <error-code>400</error-code>

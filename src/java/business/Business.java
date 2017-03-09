@@ -72,37 +72,37 @@ public class Business implements business.BusinessLogic {
         Database db = Database.getInstance();
         return db.retriveProducts(categoryName);
     }
-    
-    public void updateProduct(Product product){
+
+    public void updateProduct(Product product) {
         Database db = Database.getInstance();
         db.updateProduct(product);
     }
-    
-    public void deleteProduct(int id){
+
+    public void deleteProduct(int id) {
         Database db = Database.getInstance();
         db.deleteProduct(id);
     }
-    
-    public void deleteCategory(String name){
+
+    public void deleteCategory(String name) {
         Database db = Database.getInstance();
         db.deleteCategory(name);
     }
-    
-    public List<User> retriveUsers(){
+
+    public List<User> retriveUsers() {
         Database db = Database.getInstance();
         return db.retriveUsers();
     }
-    
-    public List<Order> retriveOrders(int userId){
+
+    public List<Order> retriveOrders(int userId) {
         Database db = Database.getInstance();
         return db.retriveOrders(userId);
     }
-    
-    public List<CreditCard> retriveCards(){
+
+    public List<CreditCard> retriveCards() {
         Database db = Database.getInstance();
         return db.retriveCards();
     }
-    
+
     public void printCard(int cardId) {
         Database db = Database.getInstance();
         db.printCard(cardId);
@@ -154,7 +154,6 @@ public class Business implements business.BusinessLogic {
     @Override
     public boolean checkValidUrl(String token) {
 
-        
         Database db = Database.getInstance();
         Timestamp expirationDateInDB = db.retriveExpirationDate(token);
         if (null == expirationDateInDB || token == null) {
@@ -231,9 +230,9 @@ public class Business implements business.BusinessLogic {
     /*end asmaa*/
  /*Start ibrahiem*/
     @Override
-    public void addCreditCard(double amount) {
+    public void addCreditCard(double amount, int numberOfCards) {
         Database db = Database.getInstance();
-        db.addCard(new CreditCard(numbGen(), amount));
+        db.addCard(new CreditCard(numbGen(), amount), numberOfCards);
     }
 
     public static long numbGen() {
@@ -244,7 +243,8 @@ public class Business implements business.BusinessLogic {
             }
         }
     }
-    public List<Product> retriveProducts(String SearchText,String categoryName) {
+
+    public List<Product> retriveProducts(String SearchText, String categoryName) {
         Database db = Database.getInstance();
         return db.retriveProducts(categoryName);
     }

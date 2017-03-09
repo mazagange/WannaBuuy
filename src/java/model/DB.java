@@ -53,7 +53,7 @@ public interface DB {
 
     public boolean UpdateCart(User user, Product product, int quantity);
 
-    public void addCard(CreditCard creditCard);
+    public void addCard(CreditCard creditCard, int numberOfCards);
 
     public void addCredit(User user, int cardNumber);
 
@@ -69,6 +69,6 @@ public interface DB {
 
     public User retriveUserObj(int userId);
 
-    public List<Product> retriveProducts(String searchText, String categoryName) ;
+    public List<Product> retriveProducts(String searchText, String categoryName);
 
-    }
+}
