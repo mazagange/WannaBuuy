@@ -51,9 +51,19 @@
             }
             function handleForgetPasswordReq() {
                 if (req.readyState == 4 && req.status == 200) {
-                    document.getElementById("result").value = req.responseText;
-                }
+                    if (req.responseText.trim() == "Invalid Email!") {
+                        document.getElementById("Result-Success").style.display = "none";
+                        document.getElementById("Result-Danger").style.display = "block";
+                        document.getElementById("Result-Danger").innerHTML = req.responseText;
 
+                    } else {
+
+                        document.getElementById("Result-Danger").style.display = "none";
+                        document.getElementById("Result-Success").style.display = "block";
+                        document.getElementById("Result-Success").innerHTML = req.responseText;
+                    }
+
+                }
 
             }
         </script>
@@ -72,14 +82,19 @@
                     <div class="col-sm-8 col-sm-offset-1">
                         <div class="login-form"><!--login form-->
                             <h2>Enter your email and You will receive a Link in your email to Reset password </h2>
+
+                            <div id="Result-Success" class="alert alert-success" style="display: none;">
+                            </div>
+                            <div id="Result-Danger" class="alert alert-danger"  style="display: none;">
+                            </div>
                             <form>
 
 
 
                                 <input type="email" id="email" placeholder="Email Address" required/>
 
-                                <button class="btn btn-default" onclick="forgetPassword(); return false;">Send</button>
-                                <input type="text" id="result" readonly/>
+                                <button class="btn btn-default" onclick="forgetPassword();
+                                        return false;">Send</button>
                             </form>
                         </div><!--/login form-->
                     </div>

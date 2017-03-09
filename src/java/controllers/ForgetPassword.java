@@ -49,8 +49,8 @@ public class ForgetPassword extends HttpServlet {
         String email = request.getParameter("email");
         Business business = new Business();
         if (business.forgetPassword(email, appUrl)) {
-            // response.sendRedirect("login.jsp");
-            out.println("Messege sent successfully");
+
+            out.println("Messege sent successfully please check your Email ");
         } else {
 
             out.println("Invalid Email!");

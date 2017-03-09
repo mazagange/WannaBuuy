@@ -231,6 +231,27 @@
                                 </div>
                             </div><!--/brands_products-->
 
+                                            
+                            <form action="Search" method="POST" style="margin-top: 15px;margin-bottom: 15px;">
+
+
+
+
+                                <input type="text" placeholder="Search For Products"  name="searchText" style="width: 100%"/>
+
+
+
+                                <select name="category">
+                                    <my:CategoriesTag/>
+                                </select>
+
+
+                                <div class="search_box pull-right" >
+                                    <button class="btn btn-warning" type="submit">Search</button>
+                                </div>
+
+                            </form>
+
                             <div class="price-range"><!--price-range-->
                                 <h2>Price Range</h2>
                                 <div class="well text-center">

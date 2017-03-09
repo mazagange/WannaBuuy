@@ -75,27 +75,6 @@
                             </div>
                         </div>
                     </div>
-<!--                    <div class="row">
-                        <form action="Search" method="POST">
-
-                            <div class="col-sm-3"></div>
-
-                            <div class="col-sm-3">
-                                <input type="text" placeholder="Search"  name="searchText" style="width: 100%"/>
-                            </div>
-                            <div class="col-sm-2">
-
-                                <select name="category">
-                                    <my:CategoriesTag/>
-                                </select>
-                            </div>
-                            <div class="col-sm-3">
-                                                                    <div class="search_box pull-right">
-                                <button class="btn btn-warning" type="submit">Search</button>
-                                                                    </div>
-                            </div>
-                        </form>
-                    </div>-->
                 </div>
 
             </div><!--/header-bottom-->
