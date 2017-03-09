@@ -30,7 +30,7 @@ public class Database implements DB {
 
     final static String URL = "jdbc:mysql://localhost/wannabuy";
     final static String USER = "root";
-    final static String PASS = "";
+    final static String PASS = "root";
     private Connection con;
 
     private Database() {
