@@ -27,7 +27,7 @@ public class Search extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String category = request.getParameter("category");
-        String searchText =request.getParameter("searchText");
+        String searchText = request.getParameter("searchText");
         String page = request.getParameter("page");
         if (category == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "category is required");
@@ -37,7 +37,13 @@ public class Search extends HttpServlet {
             }
             int pageNo = Integer.parseInt(page);
             Business business = new Business();
-            List<model.Product> products = business.retriveProducts(searchText,category);
+            List<model.Product> products;
+            if (category.equals("All")) {
+                 products = business.retriveAllProduct(searchText);
+
+            } else {
+                 products = business.retriveProducts(searchText, category);
+            }
             System.out.println(products.size());
             Stream<Product> stream = products.stream();
             if (pageNo == 1) {

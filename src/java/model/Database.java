@@ -785,7 +785,7 @@ public class Database implements DB {
     /*End asmaa*/
  /*Start ibrahiem*/
     @Override
-    public List<Product> retriveProducts(String searchText, String categoryName) {
+    public List<Product> searchProducts(String searchText, String categoryName) {
         List<Product> products = new ArrayList<>();
         try {
 
@@ -817,6 +817,38 @@ public class Database implements DB {
         return products;
     }
 
+    @Override
+    public List<Product> searchAllProducts(String searchText) {
+        List<Product> products = new ArrayList<>();
+        try {
+
+            PreparedStatement select = con.prepareStatement("SELECT product.product_id, product.product_name,product.price,"
+                    + " product.description,product.image,"
+                    + " product.quantityInStock,productcategory.category_name as cat_name FROM"
+                    + " product LEFT JOIN productcategory ON product.product_category=productcategory.category_id"
+                    + " Where product_name like ?");
+            select.setString(1, "%" + searchText + "%");
+
+            ResultSet rs = select.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt(1));
+                product.setName(rs.getString(2));
+                product.setPrice(rs.getDouble(3));
+                product.setDescription(rs.getString(4));
+                product.setImage(rs.getString(5));
+                product.setStockQuantity(rs.getInt(6));
+                product.setCategory(rs.getString(7));
+                products.add(product);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return products;
+    }
+    
     public static long numbGen() {
         while (true) {
             long numb = (long) (Math.random() * 100000000 * 1000000); // had to use this as int's are to small for a 10 digit number.

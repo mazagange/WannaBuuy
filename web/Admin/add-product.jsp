@@ -52,7 +52,7 @@
                                     </c:forEach>
                                 </select>
 
-                                <label>image</label><input type='file' name="image" accept="image/*" onchange="readURL(this);" style="background: none"  required/>
+                                <label>image</label><input type='file' name="image" accept="image/*" onchange="readURL(this);" style="background: none"  />
 
 
 

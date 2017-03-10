@@ -2,7 +2,7 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <filter>
         <filter-name>LoginFilter</filter-name>
-        <filter-class>controllers.LoginFilter</filter-class>
+        <filter-class>filters.LoginFilter</filter-class>
     </filter>
     <filter-mapping>
         <filter-name>LoginFilter</filter-name>
@@ -41,7 +41,7 @@
     </servlet>
     <servlet>
         <servlet-name>Products</servlet-name>
-        <servlet-class>controllers.R</servlet-class>
+        <servlet-class>controllers.Products</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ForgetPassword</servlet-name>
@@ -103,6 +103,10 @@
         <servlet-name>RechargeAccount</servlet-name>
         <servlet-class>controllers.RechargeAccount</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Home</servlet-name>
+        <servlet-class>controllers.Home</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCategory</servlet-name>
         <url-pattern>/Admin/AddCategory</url-pattern>
@@ -140,7 +144,7 @@
         <location>/404.html</location>
     </error-page>
     <error-page>
-    <error-code>404</error-code>
+        <error-code>404</error-code>
         <location>/404.html</location>
     </error-page>
     <servlet-mapping>
@@ -199,7 +203,7 @@
         <servlet-name>AdminAddCards</servlet-name>
         <url-pattern>/Admin/AddCards</url-pattern>
     </servlet-mapping>
-      <servlet>
+    <servlet>
         <servlet-name>RetrieveFromCart</servlet-name>
         <servlet-class>controllers.RetrieveFromCart</servlet-class>
     </servlet>
@@ -211,7 +215,7 @@
         <servlet-name>ShippingOrder</servlet-name>
         <servlet-class>controllers.ShippingOrder</servlet-class>
     </servlet>
-  <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>RetrieveFromCart</servlet-name>
         <url-pattern>/RetrieveFromCart</url-pattern>
     </servlet-mapping>
@@ -234,6 +238,10 @@
     <servlet-mapping>
         <servlet-name>RechargeAccount</servlet-name>
         <url-pattern>/RechargeAccount</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Home</servlet-name>
+        <url-pattern>/Home</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

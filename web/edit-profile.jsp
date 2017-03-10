@@ -35,69 +35,73 @@
         <!--include the header of the page-->
         <!--todo check if the user is logged-in to retrive the logged in header--> 
 
+    <c:if test="${sessionScope.user !=null}">
+        <jsp:include page="loggedin-header.jsp" />
+    </c:if>
+    <c:if test="${sessionScope.user ==null}">
         <jsp:include page="header.jsp" />
-        <!--end the header of the page-->
+    </c:if>        <!--end the header of the page-->
 
-        <section id="form" style="margin-top: 15px;"><!--form-->
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-4 ">
-                        <div class="login-form" >
-                            <form action="EditProfile" method="POST">
+    <section id="form" style="margin-top: 15px;"><!--form-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4 ">
+                    <div class="login-form" >
+                        <form action="EditProfile" method="POST">
 
-                                <label>First Name</label><input type="text" name="firstName" value="${sessionScope.user.firstName}"/>                 
-                                <label>Last Name</label><input type="text" name="lastName" value="${sessionScope.user.lastName}" />        
-                                <label>city</label><input type="text" name="city" value="${sessionScope.user.city}" />                             
-                                <label>country</label><input  type="text" name="country" value="${sessionScope.user.country}" /> 
-                                <label>address</label><input type="text" name="address" value="${sessionScope.user.address}" /> 
-                                <label>phone</label><input type="tel"  name="phone" value="${sessionScope.user.phone}"/>       
-                                <label>Zip code</label><input type="number" name="zipCode" value="${sessionScope.user.zipCode}"/>                    
-                                <button type="submit" value="submit" class="btn btn-default">Edit</button>
+                            <label>First Name</label><input type="text" name="firstName" value="${sessionScope.user.firstName}"/>                 
+                            <label>Last Name</label><input type="text" name="lastName" value="${sessionScope.user.lastName}" />        
+                            <label>city</label><input type="text" name="city" value="${sessionScope.user.city}" />                             
+                            <label>country</label><input  type="text" name="country" value="${sessionScope.user.country}" /> 
+                            <label>address</label><input type="text" name="address" value="${sessionScope.user.address}" /> 
+                            <label>phone</label><input type="tel"  name="phone" value="${sessionScope.user.phone}"/>       
+                            <label>Zip code</label><input type="number" name="zipCode" value="${sessionScope.user.zipCode}"/>                    
+                            <button type="submit" value="submit" class="btn btn-default">Edit</button>
 
-                            </form>
+                        </form>
 
 
 
-                        </div>
-                    </div>
-                    <!--                    <div class="col-sm-1">
-                                            <h2 class="or">OR</h2>
-                                        </div>-->
-                    <div class="col-sm-4">
-                        <!--                        <div class="signup-form">sign up form
-                                                    <h2>New User Signup!</h2>
-                                                    <form action="#">
-                                                        <input type="text" name="fName" placeholder="first Name" required/>
-                                                        <input type="text" name="lName" placeholder="last Name" required/>
-                        
-                        
-                                                        <input type="email" name="email" placeholder="Email Address" required />
-                                                        <input type="password" name="pass" placeholder="Password" required/>
-                                                        <input type="text" name="city" placeholder="City" required/>
-                                                        <input type="text" name="country" placeholder=" Country" required/>
-                                                        <input type="text" name="address" placeholder="Address" required/>
-                                                        <input type="tel" name="phone" placeholder="Phone" required/>
-                                                        <input type="number" name="zip" placeholder="Postal code" required />
-                                                        <button type="submit" class="btn btn-default">Signup</button>
-                                                    </form>
-                                                </div>/sign up form-->
                     </div>
                 </div>
+                <!--                    <div class="col-sm-1">
+                                        <h2 class="or">OR</h2>
+                                    </div>-->
+                <div class="col-sm-4">
+                    <!--                        <div class="signup-form">sign up form
+                                                <h2>New User Signup!</h2>
+                                                <form action="#">
+                                                    <input type="text" name="fName" placeholder="first Name" required/>
+                                                    <input type="text" name="lName" placeholder="last Name" required/>
+                    
+                    
+                                                    <input type="email" name="email" placeholder="Email Address" required />
+                                                    <input type="password" name="pass" placeholder="Password" required/>
+                                                    <input type="text" name="city" placeholder="City" required/>
+                                                    <input type="text" name="country" placeholder=" Country" required/>
+                                                    <input type="text" name="address" placeholder="Address" required/>
+                                                    <input type="tel" name="phone" placeholder="Phone" required/>
+                                                    <input type="number" name="zip" placeholder="Postal code" required />
+                                                    <button type="submit" class="btn btn-default">Signup</button>
+                                                </form>
+                                            </div>/sign up form-->
+                </div>
             </div>
-        </section><!--/form-->
+        </div>
+    </section><!--/form-->
 
-        <!--include the footer of the page-->
+    <!--include the footer of the page-->
 
-        <jsp:include page="footer.jsp" />
-        <!--end the footer of the page-->
+    <jsp:include page="footer.jsp" />
+    <!--end the footer of the page-->
 
 
 
-        <script src="js/jquery.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/jquery.scrollUp.min.js"></script>
-        <script src="js/price-range.js"></script>
-        <script src="js/jquery.prettyPhoto.js"></script>
-        <script src="js/main.js"></script>
-    </body>
+    <script src="js/jquery.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.scrollUp.min.js"></script>
+    <script src="js/price-range.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+    <script src="js/main.js"></script>
+</body>
 </html>
