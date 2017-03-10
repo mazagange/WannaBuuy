@@ -785,7 +785,7 @@ public class Database implements DB {
     /*End asmaa*/
  /*Start ibrahiem*/
     @Override
-    public List<Product> searchProducts(String searchText, String categoryName) {
+    public List<Product> searchProducts(String searchText, String categoryName, float lowPrice, float highPrice) {
         List<Product> products = new ArrayList<>();
         try {
 
@@ -793,9 +793,11 @@ public class Database implements DB {
                     + " product.description,product.image,"
                     + " product.quantityInStock,productcategory.category_name as cat_name FROM"
                     + " product LEFT JOIN productcategory ON product.product_category=productcategory.category_id"
-                    + " Where category_name = ? and product_name like ?");
+                    + " Where category_name = ? and product_name like ? and product.price BETWEEN ? AND ?;");
             select.setString(1, categoryName);
             select.setString(2, "%" + searchText + "%");
+            select.setFloat(3, lowPrice);
+            select.setFloat(4, highPrice);
 
             ResultSet rs = select.executeQuery();
             while (rs.next()) {
@@ -818,7 +820,7 @@ public class Database implements DB {
     }
 
     @Override
-    public List<Product> searchAllProducts(String searchText) {
+    public List<Product> searchAllProducts(String searchText, float lowPrice, float highPrice) {
         List<Product> products = new ArrayList<>();
         try {
 
@@ -826,8 +828,10 @@ public class Database implements DB {
                     + " product.description,product.image,"
                     + " product.quantityInStock,productcategory.category_name as cat_name FROM"
                     + " product LEFT JOIN productcategory ON product.product_category=productcategory.category_id"
-                    + " Where product_name like ?");
+                    + " Where product_name like ? and product.price BETWEEN ? AND ?;");
             select.setString(1, "%" + searchText + "%");
+            select.setFloat(2, lowPrice);
+            select.setFloat(3, highPrice);
 
             ResultSet rs = select.executeQuery();
             while (rs.next()) {
@@ -848,7 +852,7 @@ public class Database implements DB {
         }
         return products;
     }
-    
+
     public static long numbGen() {
         while (true) {
             long numb = (long) (Math.random() * 100000000 * 1000000); // had to use this as int's are to small for a 10 digit number.

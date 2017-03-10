@@ -36,18 +36,20 @@ public class Login extends HttpServlet {
         String pass = request.getParameter("pass");
         Business business = new Business();
         User user = business.checkLogin(email, pass);
-            if (user != null) {
-                if (user.isEmailConfirmed()) {
-                    HttpSession session = request.getSession(true);
-                    session.setAttribute("user", user);
-                    response.sendRedirect("Home");
-                } else {
-                    response.sendRedirect("login.jsp?error=confirm");
-                }
-
+        if (user != null) {
+            if (user.isEmailConfirmed()) {
+                HttpSession session = request.getSession(true);
+                session.setAttribute("user", user);
+                response.sendRedirect("Home");
             } else {
-                response.sendRedirect("login.jsp?error=login");
+                request.setAttribute("error", "confirm");
+                request.getRequestDispatcher("login.jsp").forward(request, response);
             }
+
+        } else {
+            request.setAttribute("error", "login");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+        }
 
     }
 

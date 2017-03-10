@@ -29,6 +29,8 @@ public class Search extends HttpServlet {
         String category = request.getParameter("category");
         String searchText = request.getParameter("searchText");
         String page = request.getParameter("page");
+        String price = request.getParameter("price");
+        System.out.println(price);
         if (category == null) {
             response.sendError(HttpServletResponse.SC_BAD_REQUEST, "category is required");
         } else {
@@ -39,10 +41,10 @@ public class Search extends HttpServlet {
             Business business = new Business();
             List<model.Product> products;
             if (category.equals("All")) {
-                 products = business.retriveAllProduct(searchText);
+                 products = business.searchAllProducts(searchText,0.0f,600.0f);
 
             } else {
-                 products = business.retriveProducts(searchText, category);
+                 products = business.retriveProducts(searchText, category,0.0f,600.0f);
             }
             System.out.println(products.size());
             Stream<Product> stream = products.stream();

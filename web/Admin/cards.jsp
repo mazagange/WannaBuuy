@@ -49,8 +49,8 @@
                                     <strong>Cards Added successfully </strong> 
                                 </div>
                             </c:if>
-                            <h2>cards</h2>
                             <button onclick="location.href='AddCards';" class="btn btn-default">Add Cards</button>
+                            <h2>Avaliable Cards</h2>
                             <table class="table" style="width: 100%; margin-top: 10px">
                                 <tr><th>number</th><th>amount</th><th></th></tr>
                                 <c:forEach items="${cards}" var="card">
@@ -64,6 +64,7 @@
                     <!--                    <div class="col-sm-1">
                                             <h2 class="or">OR</h2>
                                         </div>-->
+                    <div class="col-sm-2"></div>
                     <div class="col-sm-4">
                         <h2>printed cards</h2>
                         <table class="table" style="width: 100%; margin-top: 10px">

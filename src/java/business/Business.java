@@ -73,10 +73,10 @@ public class Business implements business.BusinessLogic {
         Database db = Database.getInstance();
         return db.retriveProduct(id);
     }
-    public List<Product> retriveAllProduct(String searchText ) {
-        Database db = Database.getInstance();
-        return db.searchAllProducts(searchText);
-    }
+//    public List<Product> retriveAllProduct(String searchText ) {
+//        Database db = Database.getInstance();
+//        return db.searchAllProducts(searchText);
+//    }
 
     public List<Product> retriveProducts(String categoryName) {
         Database db = Database.getInstance();
@@ -278,13 +278,13 @@ public class Business implements business.BusinessLogic {
     }
 
 
-    public List<Product> retriveProducts(String searchText, String categoryName) {
+    public List<Product> retriveProducts(String searchText, String categoryName ,float lowPrice,float highPrice) {
         Database db = Database.getInstance();
-        return db.searchProducts(searchText,categoryName);
+        return db.searchProducts(searchText,categoryName,lowPrice,highPrice);
     }
-    public List<Product> searchAllProducts(String searchText) {
+    public List<Product> searchAllProducts(String searchText, float lowPrice,float highPrice) {
         Database db = Database.getInstance();
-        return db.searchAllProducts(searchText);
+        return db.searchAllProducts(searchText,lowPrice,highPrice);
     }
     public List<Product> retriveProducts() {
         Database db = Database.getInstance();

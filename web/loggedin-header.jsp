@@ -32,7 +32,7 @@
 								<li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                                                 <li><a href="view-profile.jsp"><i class="fa fa-user"></i>${sessionScope.user.firstName}</a></li>
 <!--                                                                <li></li>-->
-								<li><a href="Login.jsp"><i class="fa fa-sign-out"></i> Logout</a></li>
+								<li><a href="Logout"><i class="fa fa-sign-out"></i> Logout</a></li>
 							</ul>
 						</div>
 					</div>

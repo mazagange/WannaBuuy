@@ -69,8 +69,8 @@ public interface DB {
 
     public User retriveUserObj(int userId);
 
-    public List<Product> searchProducts(String searchText, String categoryName);
+    public List<Product> searchProducts(String searchText, String categoryName,float lowPrice ,float highPrice);
 
-    public List<Product> searchAllProducts(String searchText);
+    public List<Product> searchAllProducts(String searchText, float lowPrice, float highPrice);
 
 }
