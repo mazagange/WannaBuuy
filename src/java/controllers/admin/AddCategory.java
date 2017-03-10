@@ -44,7 +44,7 @@ public class AddCategory extends HttpServlet {
         if(business.addCategory(catName)){
             response.sendRedirect("Categories?msg=added");
         }else{
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST);
+            response.sendRedirect("Categories?msg=exist");
         }
     }
 
