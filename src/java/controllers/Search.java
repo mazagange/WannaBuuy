@@ -28,42 +28,32 @@ public class Search extends HttpServlet {
             throws ServletException, IOException {
         String category = request.getParameter("category");
         String searchText = request.getParameter("searchText");
-        String page = request.getParameter("page");
-        String price = request.getParameter("price");
-        System.out.println(price);
-        if (category == null) {
-            response.sendError(HttpServletResponse.SC_BAD_REQUEST, "category is required");
-        } else {
-            if (page == null) {
-                page = "1";
-            }
-            int pageNo = Integer.parseInt(page);
+        String minPrice = request.getParameter("minPrice");
+        String maxPrice = request.getParameter("maxPrice");
+        System.out.println(minPrice +  "-"  + maxPrice);
             Business business = new Business();
             List<model.Product> products;
             if (category.equals("All")) {
-                 products = business.searchAllProducts(searchText,0.0f,600.0f);
-
+                if(searchText.equals("")){
+                    products = business.searchAllProducts(Float.parseFloat(minPrice),Float.parseFloat(maxPrice));
+                }else{
+                 products = business.searchAllProducts(searchText,Float.parseFloat(minPrice),Float.parseFloat(maxPrice));
+                }
             } else {
-                 products = business.retriveProducts(searchText, category,0.0f,600.0f);
+                if(searchText.equals("")){
+                    products = business.retriveProducts(category,Float.parseFloat(minPrice),Float.parseFloat(maxPrice));
+                }else{
+                 products = business.retriveProducts(searchText, category,Float.parseFloat(minPrice),Float.parseFloat(maxPrice));
+                }
             }
-            System.out.println(products.size());
-            Stream<Product> stream = products.stream();
-            if (pageNo == 1) {
-                stream = stream.limit(12);
-            } else {
-                stream = stream.skip((pageNo - 1) * 12).limit(12);
-            }
-            List<Product> collect = stream.collect(Collectors.toList());
-            System.out.println(collect.size());
+            
             List<String> categories = business.getCategories();
             request.setAttribute("categories", categories);
-            request.setAttribute("products", collect);
-            request.setAttribute("pageNo", pageNo);
+            request.setAttribute("products", products);
             request.setAttribute("category", category);
-            request.setAttribute("pagesNo", (int) Math.ceil(products.size() / (double) 12));
-            System.out.println((int) Math.ceil(products.size() / (double) 12));
+            
             request.getRequestDispatcher("shop.jsp").forward(request, response);
-        }
+        
     }
 
     /**

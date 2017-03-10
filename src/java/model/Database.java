@@ -30,7 +30,7 @@ public class Database implements DB {
 
     final static String URL = "jdbc:mysql://localhost/wannabuy";
     final static String USER = "root";
-    final static String PASS = "root";
+    final static String PASS = "";
     private Connection con;
 
     private Database() {
@@ -644,6 +644,73 @@ public class Database implements DB {
         }
         return creditCards;
     }
+    
+    public List<Product> retriveProducts(String category, float lowPrice, float highPrice) {
+        List<Product> products = new ArrayList<>();
+        try {
+
+            PreparedStatement select = con.prepareStatement("SELECT product.product_id, product.product_name,product.price,"
+                    + " product.description,product.image,"
+                    + " product.quantityInStock,productcategory.category_name as cat_name FROM"
+                    + " product LEFT JOIN productcategory ON product.product_category=productcategory.category_id"
+                    + " Where category_name = ? and product.price BETWEEN ? AND ?;");
+            select.setString(1, category);
+            
+            select.setFloat(2, lowPrice);
+            select.setFloat(3, highPrice);
+
+            ResultSet rs = select.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt(1));
+                product.setName(rs.getString(2));
+                product.setPrice(rs.getDouble(3));
+                product.setDescription(rs.getString(4));
+                product.setImage(rs.getString(5));
+                product.setStockQuantity(rs.getInt(6));
+                product.setCategory(rs.getString(7));
+                products.add(product);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return products;
+    }
+
+    public List<Product> searchAllProducts(float lowPrice, float highPrice) {
+        List<Product> products = new ArrayList<>();
+        try {
+
+            PreparedStatement select = con.prepareStatement("SELECT product.product_id, product.product_name,product.price,"
+                    + " product.description,product.image,"
+                    + " product.quantityInStock,productcategory.category_name as cat_name FROM"
+                    + " product LEFT JOIN productcategory ON product.product_category=productcategory.category_id"
+                    + " Where  product.price BETWEEN ? AND ?;");
+            
+            select.setFloat(1, lowPrice);
+            select.setFloat(2, highPrice);
+
+            ResultSet rs = select.executeQuery();
+            while (rs.next()) {
+                Product product = new Product();
+                product.setId(rs.getInt(1));
+                product.setName(rs.getString(2));
+                product.setPrice(rs.getDouble(3));
+                product.setDescription(rs.getString(4));
+                product.setImage(rs.getString(5));
+                product.setStockQuantity(rs.getInt(6));
+                product.setCategory(rs.getString(7));
+                products.add(product);
+            }
+            rs.close();
+        } catch (SQLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return products;
+    }
 
 
     /*End mohsen*/
@@ -862,4 +929,6 @@ public class Database implements DB {
         }
     }
     /*end ibrahiem*/
+
+    
 }

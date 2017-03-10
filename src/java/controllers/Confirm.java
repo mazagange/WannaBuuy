@@ -44,7 +44,7 @@ public class Confirm extends HttpServlet {
             Business business = new Business();
             boolean confirmed = business.confirmEmail(email, token);
             if (confirmed) {
-                response.sendRedirect("Login");
+                response.sendRedirect("login.jsp");
             } else {
                 response.sendError(HttpServletResponse.SC_BAD_REQUEST, "important_parameter needed");
             }

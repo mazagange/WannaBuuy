@@ -117,6 +117,16 @@ public class Business implements business.BusinessLogic {
         Database db = Database.getInstance();
         db.printCard(cardId);
     }
+    
+    public List<Product> searchAllProducts(float parseFloat, float parseFloat0) {
+        Database db = Database.getInstance();
+        return db.searchAllProducts(parseFloat,parseFloat0);
+    }
+
+    public List<Product> retriveProducts(String category, float parseFloat, float parseFloat0) {
+        Database db = Database.getInstance();
+        return db.retriveProducts(category,parseFloat,parseFloat0);
+    }
 
 
     /*End mohsen*/
@@ -291,4 +301,6 @@ public class Business implements business.BusinessLogic {
         return db.retriveProducts();
     }
     /*end ibrahiem*/
+
+    
 }

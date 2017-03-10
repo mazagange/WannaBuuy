@@ -177,7 +177,10 @@
 				this.selectionElStyle.width = Math.abs(this.percentage[0] - this.percentage[1]) +'%';
 			}
 			if (this.range) {
+                                document.getElementById("minPrice").value = this.value[0];
+                                document.getElementById("maxPrice").value = this.value[1];
 				this.tooltipInner.text(
+                                        
 					this.formater(this.value[0]) + 
 					' : ' + 
 					this.formater(this.value[1])
