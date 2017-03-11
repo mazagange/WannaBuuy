@@ -100,7 +100,7 @@
                                     <span>
                                         <span>${product.price} EGP</span>
                                         <label >Quantity: ${product.stockQuantity}</label>
-                                        <input id="quantity" type="text" value="3" />
+                                        <input id="quantity" type="text" value="1" />
                                         <input id='userId' type='hidden' value='${sessionScope.user.id}'/>  
                                         <button type="button" onclick="addToCart(${product.id},${product.stockQuantity})" id="addToCartBtn" class="btn btn-fefault cart">
                                             <i class="fa fa-shopping-cart"></i>

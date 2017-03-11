@@ -58,10 +58,10 @@
                             <div class="carousel-inner">
                                 <div class="item active">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>Free E-Commerce Template</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                        <h1><span>Wanna</span>Buy</h1>
+                                        <h2>Online E-commerce</h2>
+                                        <p>Buy what you need today and free shipping  </p>
+                                        <!--<button type="button" class="btn btn-default get">Get it now</button>-->
                                     </div>
                                     <div class="col-sm-6">
                                         <img src="images/home/girl1.jpg" class="girl img-responsive" alt="" />
@@ -70,10 +70,10 @@
                                 </div>
                                 <div class="item">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>100% Responsive Design</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                        <h1><span>Wanna</span>Buy</h1>
+                                        <h2>Online E-commerce</h2>
+                                        <p>Buy what you need today and free shipping  </p>
+                                        <!--<button type="button" class="btn btn-default get">Get it now</button>-->
                                     </div>
                                     <div class="col-sm-6">
                                         <img src="images/home/girl2.jpg" class="girl img-responsive" alt="" />
@@ -83,10 +83,10 @@
 
                                 <div class="item">
                                     <div class="col-sm-6">
-                                        <h1><span>E</span>-SHOPPER</h1>
-                                        <h2>Free Ecommerce Template</h2>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. </p>
-                                        <button type="button" class="btn btn-default get">Get it now</button>
+                                        <h1><span>Wanna</span>Buy</h1>
+                                        <h2>Online E-commerce</h2>
+                                        <p>Buy what you need today and free shipping  </p>
+                                        <!--<button type="button" class="btn btn-default get">Get it now</button>-->
                                     </div>
                                     <div class="col-sm-6">
                                         <img src="images/home/girl3.jpg" class="girl img-responsive" alt="" />
@@ -141,47 +141,47 @@
                                                         </div>/brands_products-->
 
 
-                            
 
-                                <div class="price-range" style="margin-top: 60px;">
+
+                            <div class="price-range" style="margin-top: 60px;">
                                 <h2>Search</h2>
                                 <form action="Search" method="POST" style="margin-top: 15px;margin-bottom: 15px;">
 
 
 
 
-                                <input type="text" placeholder="Product name"  name="searchText" style="width: 100%"/>
+                                    <input type="text" placeholder="Product name"  name="searchText" style="width: 100%"/>
 
-                                <select name="category">
-                                    <option value="All">All</option>
+                                    <select name="category">
+                                        <option value="All">All</option>
 
-                                    <c:forEach items="${categories}" var="cat">
-                                        <option value="${cat}">${cat}</option>
-                                    </c:forEach>
-                                </select>
-                                <input id="minPrice" type="hidden" name="minPrice" value="250"/>
-                                <input id="maxPrice" type="hidden" name="maxPrice" value="450"/>
-                                <div class="well text-center">
-                                    <input type="range" name="price" class="span2" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                    <b class="pull-left">0 EGP</b> <b class="pull-right">1500 EGP</b>
-                                </div>
+                                        <c:forEach items="${categories}" var="cat">
+                                            <option value="${cat}">${cat}</option>
+                                        </c:forEach>
+                                    </select>
+                                    <input id="minPrice" type="hidden" name="minPrice" value="250"/>
+                                    <input id="maxPrice" type="hidden" name="maxPrice" value="450"/>
+                                    <div class="well text-center">
+                                        <input type="range" name="price" class="span2" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
+                                        <b class="pull-left">0 EGP</b> <b class="pull-right">1500 EGP</b>
+                                    </div>
                             </div>
 
 
-                                <div style="text-align: center">
-                                    <button class="btn btn-warning" type="submit">Search</button>
-                                </div>
-
-
-<!--                            <div>
-                                Filter by price interval: <b>10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>1000</b>
-                                <script>
-                                    $("#ex2").slider({});
-
-                                </script>
+                            <div style="text-align: center">
+                                <button class="btn btn-warning" type="submit">Search</button>
                             </div>
--->                            
+
+
+                            <!--                            <div>
+                                                            Filter by price interval: <b>10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>1000</b>
+                                                            <script>
+                                                                $("#ex2").slider({});
                             
+                                                            </script>
+                                                        </div>
+                            -->                            
+
 
                             </form>
                             <div class="shipping text-center"><!--shipping-->
@@ -208,7 +208,7 @@
                                                         <img src="${product.image}" alt="" />
                                                         <h2>${product.price} EGP</h2>
                                                         <p>${product.name}</p>
-                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                        <!--                                                        <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
                                                     </div>
                                                     <div class="product-overlay">
 
@@ -216,7 +216,7 @@
                                                             <h2>${product.price} EGP</h2>
                                                             <!--todo forward to product details with product id--> 
                                                             <a href="${baseURL}Product?id=${product.id}"><p>${product.name}</p></a>
-                                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                            <!--<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
 
                                                         </div>
                                                     </div>
@@ -233,7 +233,7 @@
 
                             </div><!--features_items-->
                         </c:forEach>
-       
+
                     </div>
                 </div>
             </div>
@@ -256,10 +256,10 @@
 
             for (var i = 0; i < cats.length; i++) {
                 if (cats[i].children.length < 2) {
-                    cats[i].style.display="none";
+                    cats[i].style.display = "none";
 
+                }
             }
-        }
         </script>
     </body>
 </html>

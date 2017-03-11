@@ -108,7 +108,7 @@
                                             <img src="${product.image}" alt="" />
                                             <h2>${product.price} EGP</h2>
                                             <p>${product.name}</p>
-                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+<!--                                            <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
                                         </div>
                                         <div class="product-overlay">
 
@@ -116,7 +116,7 @@
                                                 <h2>${product.price} EGP</h2>
                                                 <!--todo forward to product details with product id--> 
                                                 <a href="${baseURL}Product?id=${product.id}"><p>${product.name}</p></a>
-                                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                                <!--<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>-->
 
                                             </div>
                                         </div>
