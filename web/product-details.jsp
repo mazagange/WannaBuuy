@@ -26,26 +26,40 @@
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
         <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script >
-            var userExist = false;
-            function checkUserExist() {
-                var user = $('#userId').val();
-                if (user !== "") {
-                    userExist = true;
-                }
-                return userExist;
-            }
-            function addToCart(product_id, quentity) {
-                if (quentity >= $("#quantity").val() && quentity !== 0 && checkUserExist()) {
-                    $.post("AddToCart", {"userId": $('#userId').val(),
-                        "productId": product_id,
-                        "quentity": $("#quantity").val()
-                    }, submitedfun);
+            function addToCart(product_id, instock) {
+                if(instock !== 0){
+                 if(parseInt($("#quantity").val())!==0){   
+                if (instock >= $("#quantity").val() ) {
+                    console.log($("#quantity").val()+" "+instock);
+                    $.post("AddToCart", {"productId": product_id,
+                                        "quentity": $("#quantity").val()
+                                        }, submitedfun);
                     console.log(" am here in add to cart  ");
+                }else{
+                       document.getElementById("error_msg").innerHTML="not availble in stock";
+                        document.getElementById("error_msg").style.display='block';
+                        console.log("NO Product in cart");
                 }
-            }
+                }else{
+                       document.getElementById("error_msg").innerHTML="please insert up to "+instock;
+                        document.getElementById("error_msg").style.display='block';
+                        console.log("NO Product in cart");
+                 
+             }
+            }else{
+                  document.getElementById("error_msg").innerHTML="not availble in stock";
+                        document.getElementById("error_msg").style.display='block';
+                        console.log("NO Product in cart");
+                
+               }
+           }
             function submitedfun(responseTxt, statusTxt, xhr) {
                 if (statusTxt === "success") {
-                }
+                        document.getElementById("error_msg").innerHTML="product added in your cart";
+                        document.getElementById("error_msg").style.display='block';
+                        console.log("NO Product in cart");
+             
+        }
             }
         </script>
     </head><!--/head-->
@@ -100,7 +114,7 @@
                                     <span>
                                         <span>${product.price} EGP</span>
                                         <label >Quantity: ${product.stockQuantity}</label>
-                                        <input id="quantity" type="text" value="3" />
+                                        <input id="quantity" type="text" value="0" />
                                         <input id='userId' type='hidden' value='${sessionScope.user.id}'/>  
                                         <button type="button" onclick="addToCart(${product.id},${product.stockQuantity})" id="addToCartBtn" class="btn btn-fefault cart">
                                             <i class="fa fa-shopping-cart"></i>
@@ -113,7 +127,8 @@
                                 </div><!--/product-information-->
                             </div>
                         </div><!--/product-details-->
-
+        <div class="alert alert-warning" id="error_msg" style="display: none;" ></div>
+                       
                         <div class="category-tab shop-details-tab"><!--category-tab-->
                             <div class="col-sm-12">
                                 <ul class="nav nav-tabs">

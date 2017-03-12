@@ -9,13 +9,11 @@ import business.Business;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import javax.mail.Session;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import model.Order;
 import model.OrderProduct;
 import model.User;
 
@@ -23,54 +21,23 @@ import model.User;
  *
  * @author Sama
  */
-public class ShippingOrder extends HttpServlet {
+public class DisplayOrderProduct extends HttpServlet {
 
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             HttpSession session = request.getSession(true);
-            
-            String ShippingAdrress=request.getParameter("ShippingAdrress");
-            String city=request.getParameter("city");
-            String state=request.getParameter("state");
-            String phone=request.getParameter("phone");
-            String country=request.getParameter("country");
-            int zip=Integer.parseInt(request.getParameter("zip"));
-           
-            double totalPrice=Double.parseDouble(request.getParameter("totalPrice"));
-            User userObj= (User) session.getAttribute("user");
-           /* decrement user amount ,decrement quentity instock, add order record , delete from cart */
-         
+            User userObj=(User) session.getAttribute("user");
             Business business=new Business();
-            
+            System.out.println("usr"+userObj.toString());
             List<OrderProduct> orderProductList=business.retriveCart(userObj);
-        
-            if(!orderProductList.isEmpty()){
-                /* decrement user amount */
-                totalPrice=userObj.getCredit()-totalPrice;
-                userObj.setCredit(totalPrice);
-                session.setAttribute("user",userObj);
-                business.updateUser(userObj);
-               /*decrement quentity instock, delete from cart*/
-                for (OrderProduct orderPro:orderProductList){
-                        orderPro.getProduct().setStockQuantity(orderPro.getProduct().getStockQuantity()-orderPro.getQuantity());
-                        business.updateProduct(orderPro.getProduct());
-                        business.deleteFromCart(userObj,orderPro.getProduct());
-                }
-                /*add order record */
-                Order orderObj=new Order(orderProductList, ShippingAdrress, city, state, country, phone,zip);
-                System.out.println("dne ejejej");
-                business.addOrder(userObj, orderObj);
-             
-                out.print("order Submited");
-            }else{
-                out.print("NO product in cart");
-            }
-            
-            System.out.println("toaot price "+totalPrice+"userid"+userObj.toString()+"data "+ShippingAdrress+" -- "+city+" -- "+state+"--"+
-                                phone+" --- " +country+"--  "+zip);
-           }
+            System.out.println("list "+orderProductList.size());
+             request.setAttribute("orderProductList", orderProductList);
+             request.getRequestDispatcher("cart.jsp").forward(request, response);
+             out.close();
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

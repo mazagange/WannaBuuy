@@ -14,43 +14,64 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.User;
+import model.Product;
 
 /**
  *
  * @author Sama
  */
-public class AddToCart extends HttpServlet {
+public class RemoveProductFromCart extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        PrintWriter out = response.getWriter();
-        try{
-             HttpSession session = request.getSession(true);
-             User userObj=(User) session.getAttribute("user");
+        try (PrintWriter out = response.getWriter()) {
+            HttpSession session = request.getSession(true);
+            User userObj=(User) session.getAttribute("user");
             int productId=Integer.parseInt(request.getParameter("productId"));
-            int quentity=Integer.parseInt(request.getParameter("quentity"));
-            System.out.println("product s   p"+productId+"  q"+quentity+"  u"+userObj.toString());
-            model.Product productObj=new model.Product();
+            Product productObj=new Product();
             productObj.setId(productId);
             Business business=new Business();
-            business.addToCart(userObj, productObj, quentity);
-            }catch(Exception e){
-              e.printStackTrace();
-        }
+            boolean check=business.deleteFromCart(userObj,productObj);
+            System.out.println("check "+ check);
+            out.print("done ^_^");
+     }
     }
-    
-  @Override
+
+    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+    /**
+     * Handles the HTTP <code>GET</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
 
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
     }
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";

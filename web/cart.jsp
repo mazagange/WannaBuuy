@@ -5,6 +5,8 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -29,204 +31,67 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-        <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-        <script >
-            $(document).ready(function () {
-                console.log(" am here ");
-                if (checkUserExist()) {
-                    retrieveFromCart();
-                }
-            });
-            var userExist = false;
-            function checkUserExist() {
-                var user = $('#userId').val();
-                if (user !== "") {
-                    userExist = true;
-                }
-                return userExist;
-            }
-            function submitedfun(responseTxt, statusTxt, xhr) {
-                if (statusTxt === "success") {
-                    console.log(" scuccess transaction ");
-                    var tbody = document.getElementById("tbody");
-                    for (var i = 0; i < responseTxt.length; i++) {
-                        console.log("product id: " + responseTxt[i].product.id + "  -->  " +
-                                responseTxt[i].product.name + "  --> " + responseTxt[i].product.price + "  --> "
-                                + responseTxt[i].product.description + "  --> " + responseTxt[i].product.image + " -->  "
-                                + responseTxt[i].product.stockQuantity + "  --> " + responseTxt[i].product.category + " --> "
-                                + responseTxt[i].quantity);
-
-                        var timage = document.createTextNode(responseTxt[i].product.image);
-                        var tproduct_desc = document.createTextNode(responseTxt[i].product.description);
-                        var tproduct_id = document.createTextNode("Web ID: " + responseTxt[i].product.id);
-                        var tproduct_price = document.createTextNode("$" + responseTxt[i].product.price);
-                        var torderProduct_quentity = document.createTextNode(responseTxt[i].quantity);
-                        var ttotal_price = document.createTextNode("$" + eval(responseTxt[i].product.price * responseTxt[i].quantity));
-                        var tproduct_plus = document.createTextNode("+");
-                        var tproduct_minus = document.createTextNode("-");
-
-                        var rproduct_record = document.createElement('tr');
-
-                        var cproduct = document.createElement('td');
-                        cproduct.setAttribute("class", "cart_product");
-                        var ahref_c1 = document.createElement('a');
-                        ahref_c1.setAttribute("href", "");
-                        var image_c1 = document.createElement('img');
-                        image_c1.setAttribute("src", responseTxt[i].product.image);
-                        image_c1.setAttribute("alt", "");
-                        ahref_c1.appendChild(image_c1);
-                        cproduct.appendChild(ahref_c1);
-
-                        var cproduct_description = document.createElement('td');
-                        cproduct_description.setAttribute("class", "cart_description");
-                        var h4_c2 = document.createElement('h4');
-                        var ahref_c2 = document.createElement('a');
-                        ahref_c2.setAttribute("href", "");
-                        ahref_c2.appendChild(tproduct_desc);
-                        h4_c2.appendChild(ahref_c2);
-                        var p_c2 = document.createElement('p');
-                        p_c2.appendChild(tproduct_id);
-                        cproduct_description.appendChild(h4_c2);
-                        cproduct_description.appendChild(p_c2);
-
-                        var cproduct_price = document.createElement('td');
-                        cproduct_price.setAttribute("class", "cart_price");
-                        var p_c3 = document.createElement('p');
-                        p_c3.appendChild(tproduct_price);
-                        cproduct_price.appendChild(p_c3);
-
-                        var corderProduct_quentity = document.createElement('td');
-                        corderProduct_quentity.setAttribute("class", "cart_quantity");
-                        var div_c4 = document.createElement("div");
-                        div_c4.setAttribute("class", "cart_quantity_button");
-                        var ahref_c4 = document.createElement('a');
-                        ahref_c4.setAttribute("class", "cart_quantity_up");
-                        ahref_c4.setAttribute("onclick", "cartQuantityUp(\"quentity" + responseTxt[i].product.id + "\"," + responseTxt[i].product.stockQuantity + "," + responseTxt[i].product.price + ");");
-                        ahref_c4.appendChild(tproduct_plus);
-                        var input_c4 = document.createElement('input');
-                        input_c4.setAttribute("class", "cart_quantity_input");
-                        input_c4.setAttribute("type", "text");
-                        input_c4.setAttribute("readOnly", true);
-
-                        input_c4.setAttribute("name", "quantity");
-                        input_c4.setAttribute("value", responseTxt[i].quantity);
-                        input_c4.setAttribute("id", "quentity" + responseTxt[i].product.id);
-                        input_c4.setAttribute("autocomplete", "off");
-                        input_c4.setAttribute("size", "2");
-                        var ahref_c41 = document.createElement('a');
-                        ahref_c41.setAttribute("class", "cart_quantity_down");
-                        ahref_c41.setAttribute("onclick", "cartQuatityDown(\"quentity" + responseTxt[i].product.id + "\"," + responseTxt[i].product.stockQuantity + "," + responseTxt[i].product.price + ");");
-                        ahref_c41.appendChild(tproduct_minus);
-                        div_c4.appendChild(ahref_c4);
-                        div_c4.appendChild(input_c4);
-                        div_c4.appendChild(ahref_c41);
-                        corderProduct_quentity.appendChild(div_c4);
-                        var ctotal_price = document.createElement('td');
-                        ctotal_price.setAttribute("class", "cart_total");
-                        var p_c5 = document.createElement('p');
-                        p_c5.setAttribute("class", "cart_total_price");
-                        p_c5.setAttribute("id", "p" + responseTxt[i].product.id);
-                        p_c5.appendChild(ttotal_price);
-                        ctotal_price.appendChild(p_c5);
-
-                        var ccart_delete = document.createElement('td');
-                        ccart_delete.setAttribute("class", "cart_delete");
-                        var ahref_c6 = document.createElement('a');
-                        ahref_c6.setAttribute("class", "cart_quantity_delete");
-                        ahref_c6.setAttribute("onclick", "deleteRow(this," + responseTxt[i].product.id + ")");
-
-                        var i_c6 = document.createElement('i');
-                        i_c6.setAttribute("class", "fa fa-times");
-                        ahref_c6.appendChild(i_c6);
-                        ccart_delete.appendChild(ahref_c6);
-                        rproduct_record.appendChild(cproduct);
-                        rproduct_record.appendChild(cproduct_description);
-                        rproduct_record.appendChild(cproduct_price);
-                        rproduct_record.appendChild(corderProduct_quentity);
-                        rproduct_record.appendChild(ctotal_price);
-                        rproduct_record.appendChild(ccart_delete);
-                        tbody.appendChild(rproduct_record);
-                    }
-                    var count = document.getElementById("tbody").children.length;
-                    console.log(" count " + count);
-                    if (count === 0) {
-                        var tbody = document.getElementById("tbody");
-                        var p_c5 = document.createElement('p');
-                        p_c5.setAttribute("class", "cart_price");
-                        p_c5.setAttribute("style", "padding-top: 10px;font-size: 32px;text-align:center");
-                        p_c5.appendChild(document.createTextNode("There are no Products in your cart"));
-                        tbody.appendChild(p_c5);
-                    }
-
-                }
-            }
-            function cartQuantityUp(id, inStock, price) {
-                var quentity = document.getElementById(id).value;
+     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+   <script >
+     function cartQuantityUp(id, inStock, price) {
+                var quentity = id.value;
                 quentity++;
                 if (quentity <= inStock && inStock !== 0) {
-
-                    AddToCart(id.substring(8, 9), quentity, inStock);
-                    console.log("in up" + id.substring(8, 9));
-                    document.getElementById("p" + id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
-                    document.getElementById(id).value = quentity;
+                    AddToCart(id.id.substring(8, 9), quentity, inStock);
+                    console.log("in up" + id.id.substring(8, 9));
+                    document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
+                    id.value = quentity;
                 }
             }
             function cartQuatityDown(id, inStock, price) {
-                var quentity = document.getElementById(id).value;
+                var quentity =  id.value;
                 quentity--;
                 if (quentity > 0 && inStock !== 0) {
-                    AddToCart(id.substring(8, 9), quentity, inStock);
-                    console.log("in down" + id.substring(8, 9));
-                    document.getElementById("p" + id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
-                    document.getElementById(id).value = quentity;
+                    AddToCart(id.id.substring(8, 9), quentity, inStock);
+                    console.log("in down" + id.id.substring(8, 9));
+                    document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
+                    id.value = quentity;
                 }
+                
             }
-
             function deleteRow(row, product_id) {
+                 console.log("am in delete row");
                 var i = row.parentNode.parentNode.rowIndex;
                 console.log("row index " + i + "p " + product_id);
                 console.log(" am here in add to cart  ");
                 document.getElementById('tbody').deleteRow(i - 1);
-                romveFromCartFnuction(product_id);
+                romveFromCart(product_id);
                 var count = document.getElementById("tbody").children.length;
                 console.log(" count " + count);
                 if (count === 0) {
-                    var tbody = document.getElementById("tbody");
-                    var p_c5 = document.createElement('p');
-                    p_c5.setAttribute("class", "cart_price");
-                    p_c5.setAttribute("style", "padding-top: 10px; padding-right: 30px; padding-bottom: 10px; padding-left: 90px;");
-
-                    p_c5.appendChild(document.createTextNode("NO Product in cart"));
-                    tbody.appendChild(p_c5);
-                }
-            }
+                document.getElementById("error_msg").innerHTML="NO Product in cart";
+                document.getElementById("error_msg").style.display='block';
+                console.log("NO Product in cart");
+                    }
+        
+    }
             function romveFunCallBack(responseTxt, statusTxt, xhr) {
                 if (statusTxt === "success") {
-                    console.log(" success  ");
+                    console.log(" one product added to cart");
                 }
             }
             function AddToCart(product_id, quentity, inStock) {
-                if (inStock >= quentity && inStock !== 0 && checkUserExist()) {
-                    $.get("AddToCart", {"userId": $('#userId').val(),
-                        "productId": product_id,
-                        "quentity": quentity
+                if (inStock >= quentity && inStock !== 0) {
+                    $.get("AddToCart", {
+                                        "productId": product_id,
+                                        "quentity": quentity
                     }, romveFunCallBack);
 
                 }
             }
-            function romveFromCartFnuction(product_id) {
-                $.get("RetrieveFromCart", {"userId": $('#userId').val(),
-                    "productId": product_id
-                }, romveFunCallBack);
+            function romveFromCart(product_id) {
+                $.get("RemoveProductFromCart", {"productId": product_id}
+                , romveFunCallBack);
             }
-            function retrieveFromCart() {
-                $.post("RetrieveFromCart", {"userId": $('#userId').val()
-                }, submitedfun);
-                console.log(" am here in add to cart  ");
-            }
-        </script>
-    </head><!--/head-->
+     </script>
+</head><!--/head-->
 
+  
     <body>
         <!--include the header of the page-->
         <!--todo check if the user is logged-in to retrive the logged in header--> 
@@ -261,11 +126,47 @@
                         </tr>
                     </thead>
                     <tbody id="tbody">
-
+                    <c:if test="${!empty requestScope.orderProductList}">
+                          <c:set var="totalPrice" value="${0}" />
+                         <c:forEach items="${requestScope.orderProductList}" var="orderProduct">
+                           <c:set var="totalPrice" value="${totalPrice +orderProduct.product.price*orderProduct.quantity}" />
+                           <tr> 
+                           <td class="cart_product">
+                               <a href=""><img src="${orderProduct.product.image}" alt=""></a>
+                           </td>
+                           <td class="cart_description">
+                               <h4><a href="">${orderProduct.product.description}</a></h4><p>Web ID:<c:out value="${orderProduct.product.id}"/></p>
+                           </td>
+                           <td class="cart_price">
+                               <p>$<c:out value="${orderProduct.product.price}"/></p>
+                           </td>
+                           <td class="cart_quantity">
+                               <div class="cart_quantity_button">
+                                   <a class="cart_quantity_up" onclick="cartQuantityUp(quentity${orderProduct.product.id},${orderProduct.product.stockQuantity},${orderProduct.product.price});">+</a>
+                                   <input class="cart_quantity_input" type="text" readonly="true" name="quantity" value=${orderProduct.quantity} id="quentity${orderProduct.product.id}" autocomplete="off" size="2">
+                                   <a class="cart_quantity_down" onclick="cartQuatityDown(quentity${orderProduct.product.id},${orderProduct.product.stockQuantity},${orderProduct.product.price});">-</a>
+                               </div>
+                           </td>
+                           <td class="cart_total">
+                               <p class="cart_total_price" id="p${orderProduct.product.id}">$<c:out value="${orderProduct.product.price*orderProduct.quantity}"/></p>
+                           </td>
+                           <td class="cart_delete">
+                               <a class="cart_quantity_delete" onclick="deleteRow(this,${orderProduct.product.id})">
+                                   <i class="fa fa-times"></i>
+                               </a>
+                           </td>
+                          </tr>
+                        </c:forEach>
+                     </c:if>
                     </tbody>
                 </table>
             </div>
-        </div>
+               <c:if test="${empty requestScope.orderProductList}">
+                      <div class="alert alert-warning" id="error_msg1" style="display: block;" >NO Product in cart</div>
+                    </c:if>       
+                 <div class="alert alert-warning" id="error_msg" style="display: none;" >NO Product in cart</div>
+                   
+    </div>
     </section> <!--/#cart_items-->
 
     <section id="do_action">
@@ -287,7 +188,7 @@
                                             <label>Use Gift Voucher</label>
                                         </li>
                                         <li>
-                                            <input type="checkbox">
+                                           <input type="checkbox">
                                             <label>Estimate Shipping & Taxes</label>
                                         </li>
                                     </ul>

@@ -39,7 +39,7 @@ public class RetrieveFromCart extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
             PrintWriter out = response.getWriter();
-            int userId=Integer.parseInt(request.getParameter("userId"));
+           /* int userId=Integer.parseInt(request.getParameter("userId"));
             int productId=Integer.parseInt(request.getParameter("productId"));
             Product productObj=new Product();
             productObj.setId(productId);
@@ -48,8 +48,9 @@ public class RetrieveFromCart extends HttpServlet {
             Business business=new Business();
             boolean check=business.deleteFromCart(userObj,productObj);
             System.out.println("check "+ check);
-            out.print("done ^_^");
-        }
+            out.print("done ^_^");*/
+        doPost(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -57,17 +58,19 @@ public class RetrieveFromCart extends HttpServlet {
             response.setContentType("application/json");
             PrintWriter out = response.getWriter();
             HttpSession session = request.getSession(true);
-            
-            int userId=Integer.parseInt(request.getParameter("userId"));
-            User userObj= new User();
-            userObj.setId(userId);
+            User userObj=(User) session.getAttribute("user");
             Business business=new Business();
             List<OrderProduct> orderProductList=business.retriveCart(userObj);
         
            /* User user=new User(1,"asmaa@yaho.com","123", "asmaa","abdellatif", "city", "country","address", "011111656", true, 1212,new Date(12/12/1993),111111111);
             session.setAttribute("user",user);
             */
-            out.print(buildGsonFromList(orderProductList));
+             //out.print(buildGsonFromList(orderProductList));
+            System.out.println("list "+orderProductList.size());
+            
+             request.setAttribute("orderProductList", orderProductList);
+             request.getRequestDispatcher("checkout.jsp").forward(request, response);
+        
 }
 
     @Override

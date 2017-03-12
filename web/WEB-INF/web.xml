@@ -111,6 +111,14 @@
         <servlet-name>Logout</servlet-name>
         <servlet-class>controllers.Logout</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DisplayOrderProduct</servlet-name>
+        <servlet-class>controllers.DisplayOrderProduct</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>RemoveProductFromCart</servlet-name>
+        <servlet-class>controllers.RemoveProductFromCart</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>AddCategory</servlet-name>
         <url-pattern>/Admin/AddCategory</url-pattern>
@@ -247,13 +255,21 @@
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
     </servlet-mapping>
-     <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>Home</servlet-name>
-        <url-pattern></url-pattern>
+        <url-pattern/>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>Logout</servlet-name>
         <url-pattern>/Logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DisplayOrderProduct</servlet-name>
+        <url-pattern>/DisplayOrderProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RemoveProductFromCart</servlet-name>
+        <url-pattern>/RemoveProductFromCart</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

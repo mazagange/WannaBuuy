@@ -35,12 +35,9 @@
         <!--include the header of the page-->
         <!--todo check if the user is logged-in to retrive the logged in header--> 
 
-    <c:if test="${sessionScope.user !=null}">
+    
         <jsp:include page="loggedin-header.jsp" />
-    </c:if>
-    <c:if test="${sessionScope.user ==null}">
-        <jsp:include page="header.jsp" />
-    </c:if>        <!--end the header of the page-->
+           <!--end the header of the page-->
 
     <section id="form" style="margin-top: 15px;"><!--form-->
         <div class="container">
