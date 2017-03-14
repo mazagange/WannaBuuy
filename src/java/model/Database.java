@@ -31,17 +31,27 @@ public class Database implements DB {
     final static String URL = "jdbc:mysql://localhost/wannabuy";
     final static String USER = "root";
     final static String PASS = "";
-    private Connection con;
-
+    
+    ObjectPool<Connection> pool;
     private Database() {
-
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            con = DriverManager.getConnection(URL, USER, PASS);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
+         pool= new ObjectPool<Connection>(3, 10, 10)
+        {
+            protected Connection createObject()
+            {
+                Connection con = null;
+                try {
+                    // create a test object which takes some time for creation
+                    Class.forName("com.mysql.jdbc.Driver");
+                    con = DriverManager.getConnection(URL, USER, PASS);
+                } catch (ClassNotFoundException ex) {
+                    Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (SQLException ex) {
+                    Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                return con;
+            }
+        };
+        
     }
 
     public static Database getInstance() {
@@ -54,6 +64,7 @@ public class Database implements DB {
     /* israa*/
     @Override
     public boolean addUser(User user, String token) {
+        Connection con = pool.borrowObject();
         try {
             if (!checkAlreadyRegistered(user.getEmail())) {
                 PreparedStatement pst = con.prepareStatement("insert into user(email,password,fname,lname"
@@ -83,11 +94,13 @@ public class Database implements DB {
             System.out.println("User Already Exsists");
             ex.printStackTrace();
         }
+        pool.returnObject(con);
         return false;
     }
 
     @Override
     public boolean checkAlreadyRegistered(String email) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement pst = con.prepareStatement("select * from user where email = ?");
 
@@ -106,11 +119,13 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
         return false;
     }
 
     @Override
     public User checkLogin(String email, String password) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement pst = con.prepareStatement("select * from user where email = ?");
             pst.setString(1, email);
@@ -136,11 +151,13 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
         return null;
     }
 
     @Override
     public void updateUser(User user) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement pst = con.prepareStatement("UPDATE user set fname=?,lname=?,city=?,zip=?,phone=?,country=?,address=?,credite=? where user_id=?");
             pst.setString(1, user.getFirstName());
@@ -157,10 +174,12 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     @Override
     public void addCard(CreditCard creditCard, int numberOfCards) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement pst = con.prepareStatement("insert into creditcard(amonut,number) values(?,?)");
             for (int i = 0; i < numberOfCards; i++) {
@@ -172,10 +191,12 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     @Override
     public double checkCardExistance(long creditNumber) {
+        Connection con = pool.borrowObject();
         double amount = 0;
         try {
             PreparedStatement pst = con.prepareStatement("select amonut from creditcard where number = ?");
@@ -197,11 +218,13 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
         return amount;
     }
 
     @Override
     public void addCredit(User user, long cardNumber) {
+        Connection con = pool.borrowObject();
 
         try {
             double amountRetrieved = checkCardExistance(cardNumber);
@@ -216,11 +239,12 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
-
+        pool.returnObject(con);
     }
 
     @Override
     public void forgetPassword(String email, String token, Timestamp passwordTokenExpierDate) {
+        Connection con = pool.borrowObject();
         //insert into 2 new colums token and expiredate
         try {
             PreparedStatement pst = con.prepareStatement("UPDATE user set passwordResetToken=?,expirationDate=?  where email=?");
@@ -232,10 +256,12 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     @Override
     public Timestamp retriveExpirationDate(String passwordToken) {
+        Connection con = pool.borrowObject();
         Timestamp expirationDate = null;
         try {
 
@@ -246,16 +272,20 @@ public class Database implements DB {
                 expirationDate = rs.getTimestamp("expirationDate");
             }
             rs.close();
+            pool.returnObject(con);
             return expirationDate;
         } catch (SQLException e) {
             e.printStackTrace();
+            pool.returnObject(con);
             return expirationDate;
         }
+        
 
     }
 
     @Override
     public boolean updatePassword(String email, String newPassword) {
+        Connection con = pool.borrowObject();
 
         try {
             PreparedStatement pst = con.prepareStatement("UPDATE user set password=?,passwordResetToken=?  where email=?");
@@ -266,15 +296,18 @@ public class Database implements DB {
             pst.setString(3, email);
             pst.executeUpdate();
             pst.close();
+            pool.returnObject(con);
             return true;
         } catch (SQLException ex) {
             ex.printStackTrace();
             return false;
         }
+        
     }
 
     @Override
     public User retriveUserObj(int userId) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement pst = con.prepareStatement("select * from user where user_id = ?");
             pst.setInt(1, userId);
@@ -294,6 +327,7 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
         return null;
 
     }
@@ -303,6 +337,7 @@ public class Database implements DB {
  /* Mohsen*/
     @Override
     public boolean confirmEmail(String email, String token) {
+        Connection con = pool.borrowObject();
         boolean confirmed = false;
         try {
             PreparedStatement select = con.prepareStatement("select confirmToken FROM user WHERE email = ?");
@@ -323,11 +358,13 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
         return confirmed;
     }
 
     @Override
     public void addCategory(String name) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement insert = con.prepareStatement("insert into productcategory(category_name) values(?)");
             insert.setString(1, name);
@@ -336,10 +373,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     @Override
     public boolean categoryExsits(String name) {
+        Connection con = pool.borrowObject();
         boolean exist = true;
         try {
             PreparedStatement select = con.prepareStatement("select COUNT(*) from productcategory where category_name = ?");
@@ -352,11 +391,13 @@ public class Database implements DB {
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+        pool.returnObject(con);
         return exist;
     }
 
     @Override
     public void deleteCategory(String name) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement delete = con.prepareStatement("delete from productcategory where category_name = ?");
             delete.setString(1, name);
@@ -365,10 +406,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     @Override
     public void addProduct(Product product) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement insert = con.prepareStatement("insert into product(product_name,price,description,image,quantityInStock,product_category) values(?,?,?,?,?,?)");
             PreparedStatement select = con.prepareStatement("select category_id FROM productcategory WHERE category_name = ?");
@@ -387,10 +430,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     @Override
     public void updateProduct(Product product) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement update = con.prepareStatement("update product set product_name= ?,price = ?,description = ?,image = ?,quantityInStock = ? where product_id = ?");
             update.setString(1, product.getName());
@@ -404,10 +449,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     @Override
     public void deleteProduct(int productId) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement delete = con.prepareStatement("delete from product where product_id = ?");
             delete.setInt(1, productId);
@@ -416,10 +463,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     @Override
     public Product retriveProduct(int id) {
+        Connection con = pool.borrowObject();
         Product product = new Product();
         try {
 
@@ -440,11 +489,13 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return product;
     }
 
     @Override
     public List<Product> retriveProducts(String categoryName) {
+        Connection con = pool.borrowObject();
         List<Product> products = new ArrayList<>();
         try {
 
@@ -467,11 +518,13 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return products;
     }
 
     @Override
     public List<Product> retriveProducts() {
+        Connection con = pool.borrowObject();
         List<Product> products = new ArrayList<>();
         try {
             PreparedStatement select = con.prepareStatement("SELECT product.product_id, product.product_name,product.price, product.description,product.image, product.quantityInStock,productcategory.category_name as cat_name FROM product LEFT JOIN productcategory ON product.product_category=productcategory.category_id");
@@ -492,11 +545,13 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return products;
     }
 
     @Override
     public List<String> retriveCategories() {
+        Connection con = pool.borrowObject();
         List<String> categories = new ArrayList<>();
         try {
 
@@ -510,11 +565,13 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return categories;
     }
 
     @Override
     public boolean addOrder(User user, Order order) {
+        Connection con = pool.borrowObject();
         try {
             // insert into order
             PreparedStatement insert = con.prepareStatement("insert into productorder(user_id,shipAddress,city,state,country,phone,zip) values(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -547,10 +604,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return true;
     }
 
     public List<Order> retriveOrders(int userId) {
+        Connection con = pool.borrowObject();
         List<Order> orders = new ArrayList<>();
         try {
 
@@ -583,10 +642,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return orders;
     }
 
     public List<User> retriveUsers() {
+        Connection con = pool.borrowObject();
         List<User> users = new ArrayList<>();
         try {
             PreparedStatement select = con.prepareStatement("SELECT user_id, email,fname, lname,city, zip,phone,country,registration_date,address,credite FROM user");
@@ -611,10 +672,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return users;
     }
 
     public void printCard(long cardId) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement update = con.prepareStatement("update creditcard set printed= '1' where number = ?");
             update.setLong(1, cardId);
@@ -623,9 +686,11 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
     }
 
     public List<CreditCard> retriveCards() {
+        Connection con = pool.borrowObject();
         List<CreditCard> creditCards = new ArrayList<>();
         try {
 
@@ -643,10 +708,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return creditCards;
     }
     
     public List<Product> retriveProducts(String category, float lowPrice, float highPrice) {
+        Connection con = pool.borrowObject();
         List<Product> products = new ArrayList<>();
         try {
 
@@ -677,10 +744,12 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return products;
     }
 
     public List<Product> searchAllProducts(float lowPrice, float highPrice) {
+        Connection con = pool.borrowObject();
         List<Product> products = new ArrayList<>();
         try {
 
@@ -710,6 +779,7 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return products;
     }
 
@@ -718,7 +788,7 @@ public class Database implements DB {
  /*Asmaa*/
     @Override
     public boolean addToCart(User user, Product product, int quantity) {
-
+        Connection con = pool.borrowObject();
         try {
             /*check if record exist befor or not */
  /*  PreparedStatement selectStmt = con.prepareStatement("SELECT * from cart where user_id=? and product_id=?");
@@ -736,35 +806,39 @@ public class Database implements DB {
             int result = insert.executeUpdate();
             if (result != 0) {
                 System.out.println("inserted ");
+                pool.returnObject(con);
                 return true;
             }
             //}
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return false;
     }
 
     public boolean cartExsits(User user, Product product) {
+        Connection con = pool.borrowObject();
         try {
             PreparedStatement selectStmt = con.prepareStatement("SELECT * from cart where user_id=? and product_id=?");
             selectStmt.setInt(1, user.getId());
             selectStmt.setInt(2, product.getId());
             ResultSet result1 = selectStmt.executeQuery();
             if (result1.next()) {
-
+                pool.returnObject(con);
                 return true;
             }
         } catch (SQLException ex) {
             Logger.getLogger(Database.class.getName()).log(Level.SEVERE, null, ex);
         }
+        pool.returnObject(con);
         return false;
 
     }
 
     @Override
     public boolean deleteFromCart(User user, Product product) {
-
+            Connection con = pool.borrowObject();
         try {
             // delete into cart
             PreparedStatement deleteStmt = con.prepareStatement("delete from cart where user_id=? and product_id=?");
@@ -773,17 +847,20 @@ public class Database implements DB {
             int result = deleteStmt.executeUpdate();
             if (result != 0) {
                 System.out.println("deleted");
+                pool.returnObject(con);
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return false;
 
     }
 
     @Override
     public boolean UpdateCart(User user, Product product, int quantity) {
+        Connection con = pool.borrowObject();
 
         try {
             // update cart
@@ -794,17 +871,20 @@ public class Database implements DB {
             int result = updateStmt.executeUpdate();
             if (result != 0) {
                 System.out.println("updated");
+                pool.returnObject(con);
                 return true;
             }
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return false;
 
     }
 
     @Override
     public List<OrderProduct> retriveCart(User user) {
+        Connection con = pool.borrowObject();
         List<OrderProduct> orderProductList = new ArrayList<>();
         OrderProduct orderProduct = null;
         int product_id = 0, category_id;
@@ -847,6 +927,7 @@ public class Database implements DB {
             e.printStackTrace();
         }
         System.out.println("list size " + orderProductList.size());
+        pool.returnObject(con);
         return orderProductList;
     }
 
@@ -854,6 +935,7 @@ public class Database implements DB {
  /*Start ibrahiem*/
     @Override
     public List<Product> searchProducts(String searchText, String categoryName, float lowPrice, float highPrice) {
+        Connection con = pool.borrowObject();
         List<Product> products = new ArrayList<>();
         try {
 
@@ -884,11 +966,13 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return products;
     }
 
     @Override
     public List<Product> searchAllProducts(String searchText, float lowPrice, float highPrice) {
+        Connection con = pool.borrowObject();
         List<Product> products = new ArrayList<>();
         try {
 
@@ -918,6 +1002,7 @@ public class Database implements DB {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+        pool.returnObject(con);
         return products;
     }
 
