@@ -58,15 +58,10 @@
                             <h2>Login to your account</h2>
                             <form action="Login" method="post">
 
+                                <input type="email" name="email" placeholder="Email Address" required/>
+                                <input type="password" name="pass" placeholder="Password" required/>
 
-
-                                <input type="email" name="email" placeholder="Email Address" />
-                                <input type="password" name="pass" placeholder="Password" />
-
-                                <span>
-                                    <input type="checkbox" class="checkbox"> 
-                                    Keep me signed in
-                                </span>
+                                
                                 <button type="submit" class="btn btn-default">Login</button>
                                 <a href="forget-pasword.jsp">Forgotten account?</a>
                             </form>

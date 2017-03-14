@@ -113,82 +113,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3">
-                        <div class="left-sidebar">
-                            <h2>Category</h2>
-                            <div class="panel-group category-products" id="accordian"><!--category-productsr-->
-                                <c:forEach items="${categories}" var="category">
-                                    <div class="panel panel-default">
-                                        <div class="panel-heading">
-                                            <h4 class="panel-title"><a href="Products?category=${category}">${category}</a></h4>
-                                        </div>
-                                    </div>
-                                </c:forEach>
-                            </div><!--/category-products-->
-
-                            <!--                            <div class="brands_products">brands_products
-                                                            <h2>Brands</h2>
-                                                            <div class="brands-name">
-                                                                <ul class="nav nav-pills nav-stacked">
-                                                                    <li><a href="#"> <span class="pull-right">(50)</span>Acne</a></li>
-                                                                    <li><a href="#"> <span class="pull-right">(56)</span>GrÃ¼ne Erde</a></li>
-                                                                    <li><a href="#"> <span class="pull-right">(27)</span>Albiro</a></li>
-                                                                    <li><a href="#"> <span class="pull-right">(32)</span>Ronhill</a></li>
-                                                                    <li><a href="#"> <span class="pull-right">(5)</span>Oddmolly</a></li>
-                                                                    <li><a href="#"> <span class="pull-right">(9)</span>Boudestijn</a></li>
-                                                                    <li><a href="#"> <span class="pull-right">(4)</span>RÃ¶sch creative culture</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>/brands_products-->
-
-
-
-
-                            <div class="price-range" style="margin-top: 60px;">
-                                <h2>Search</h2>
-                                <form action="Search" method="POST" style="margin-top: 15px;margin-bottom: 15px;">
-
-
-
-
-                                    <input type="text" placeholder="Product name"  name="searchText" style="width: 100%"/>
-
-                                    <select name="category">
-                                        <option value="All">All</option>
-
-                                        <c:forEach items="${categories}" var="cat">
-                                            <option value="${cat}">${cat}</option>
-                                        </c:forEach>
-                                    </select>
-                                    <input id="minPrice" type="hidden" name="minPrice" value="250"/>
-                                    <input id="maxPrice" type="hidden" name="maxPrice" value="450"/>
-                                    <div class="well text-center">
-                                        <input type="range" name="price" class="span2" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                        <b class="pull-left">0 EGP</b> <b class="pull-right">1500 EGP</b>
-                                    </div>
-                            </div>
-
-
-                            <div style="text-align: center">
-                                <button class="btn btn-warning" type="submit">Search</button>
-                            </div>
-
-
-                            <!--                            <div>
-                                                            Filter by price interval: <b>10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>1000</b>
-                                                            <script>
-                                                                $("#ex2").slider({});
-                            
-                                                            </script>
-                                                        </div>
-                            -->                            
-
-
-                            </form>
-                            <div class="shipping text-center"><!--shipping-->
-                                <img src="images/home/shipping.jpg" alt="" />
-                            </div><!--/shipping-->
-
-                        </div>
+                        <%@include file="sidebar.jsp" %> 
                     </div>
 
                     <div class="col-sm-9 padding-right">
@@ -196,11 +121,11 @@
                             <div class="features_items" id="${cat}"><!--features_items-->
                                 <h2 class="title text-center">${cat}</h2>
 
-
+                                <c:set scope="page" var="pro" value="0"/>
                                 <c:forEach items="${products}" var="product">
-
-                                    <c:if test="${cat == product.category}">
-
+                                    
+                                    <c:if test="${cat == product.category and pro<3}">
+                                        <c:set scope="page" var="pro" value="${pro+1}"/>
                                         <div class="col-sm-4">
                                             <div class="product-image-wrapper">
                                                 <div class="single-products">

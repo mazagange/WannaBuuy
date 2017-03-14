@@ -55,8 +55,8 @@
                                 <table class="table" style="width: 100%; margin-top: 10px">
                                     <tr><th>product</th><th>quantity</th><th>total price</th></tr>
                                     <c:forEach items="${order.orderDetails}" var="orderDetails">
-                                    <tr><td>${orderDetails.product.name}</td><td>${orderDetails.quantity}</td><td>${orderDetails.product.price * orderDetails.quantity} EGP</td></tr>
-                                    <c:set var="total" value="${total+(orderDetails.product.price * orderDetails.quantity)}" scope="page"/>
+                                    <tr><td>${orderDetails.product.name}</td><td>${orderDetails.quantity}</td><td>${orderDetails.quantity*orderDetails.product.price} EGP</td></tr>
+                                    <c:set var="total" value="${total+(orderDetails.product.price*orderDetails.quantity)}" scope="page"/>
                                     </c:forEach>
                                 </table>
                                 <h4>order total : ${total} EGP</h4>

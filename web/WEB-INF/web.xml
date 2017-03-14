@@ -9,8 +9,8 @@
         <servlet-name>EditProfile</servlet-name>
         <url-pattern>/edit-profile.jsp</url-pattern>
         <url-pattern>/view-profile.jsp</url-pattern>
-        <url-pattern>/checkout.jsp</url-pattern>
-        <url-pattern>/cart.jsp</url-pattern>
+        <url-pattern>/CheckOut</url-pattern>
+        <url-pattern>/Cart</url-pattern>
         <dispatcher>REQUEST</dispatcher>
         <dispatcher>FORWARD</dispatcher>
         <dispatcher>INCLUDE</dispatcher>
@@ -156,13 +156,10 @@
         <location>/404.html</location>
     </error-page>
     <error-page>
-        <error-code>404</error-code>
-        <location>/404.html</location>
-    </error-page>
-    <error-page>
         <error-code>500</error-code>
-        <location>/404.html</location>
+        <location>/500.html</location>
     </error-page>
+    
     <servlet-mapping>
         <servlet-name>ResetPassword</servlet-name>
         <url-pattern>/ResetPassword</url-pattern>
@@ -224,6 +221,10 @@
         <servlet-class>controllers.RetrieveFromCart</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>CheckOut</servlet-name>
+        <servlet-class>controllers.CheckOut</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AddToCart</servlet-name>
         <servlet-class>controllers.AddToCart</servlet-class>
     </servlet>
@@ -233,7 +234,11 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>RetrieveFromCart</servlet-name>
-        <url-pattern>/RetrieveFromCart</url-pattern>
+        <url-pattern>/Cart</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CheckOut</servlet-name>
+        <url-pattern>/CheckOut</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddToCart</servlet-name>

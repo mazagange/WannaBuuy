@@ -28,8 +28,8 @@
                             <div class="shop-menu pull-right">
                                 <ul class="nav navbar-nav">
 
-                                    <li><a href="checkout.jsp"><i class="fa fa-crosshairs"></i> Checkout</a></li>
-                                    <li><a href="cart.jsp"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                                    <li><a href="CheckOut"><i class="fa fa-crosshairs"></i> Checkout</a></li>
+                                    <li><a href="Cart"><i class="fa fa-shopping-cart"></i> Cart</a></li>
                                     <li><a href="view-profile.jsp"><i class="fa fa-user"></i>${sessionScope.user.firstName}</a></li>
                                     <!--                                                                <li></li>-->
                                     <li><a href="Logout"><i class="fa fa-sign-out"></i> Logout</a></li>

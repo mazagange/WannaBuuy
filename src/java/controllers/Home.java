@@ -43,29 +43,16 @@ public class Home extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String page = request.getParameter("page");
         Business business = new Business();
         List<String> categories = business.getCategories();
         request.setAttribute("categories", categories);
 
-        if (page == null) {
-            page = "1";
-        }
-        int pageNo = Integer.parseInt(page);
         List<model.Product> products = business.retriveProducts();
         System.out.println(products.size());
         Stream<model.Product> stream = products.stream().filter((t) -> t.getStockQuantity() > 0);
-        if (pageNo == 1) {
-            stream = stream.limit(12);
-        } else {
-            stream = stream.skip((pageNo - 1) * 12).limit(12);
-        }
         List<model.Product> collect = stream.collect(Collectors.toList());
         System.out.println(collect.size());
         request.setAttribute("products", collect);
-        request.setAttribute("pageNo", pageNo);
-        request.setAttribute("pagesNo", (int) Math.ceil(products.size() / (double) 12));
-        System.out.println((int) Math.ceil(products.size() / (double) 12));
         request.getRequestDispatcher("index.jsp").forward(request, response);
 
     }

@@ -72,6 +72,7 @@ public class EditProfile extends HttpServlet {
         user.setPhone(phone);
         user.setZipCode(zipCode);
         User userSession = (User) request.getSession().getAttribute("user");
+        user.setCredit(userSession.getCredit());
         user.setId(userSession.getId());
         Business business = new Business();
         User userUpdatedObj=business.updateUserInfo(user);

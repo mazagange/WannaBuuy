@@ -54,10 +54,10 @@
 
                     <div class="col-sm-9 padding-right">
                         <div class="features_items"><!--features_items-->
-                            <h2 class="title text-center">Features Items</h2>
-
+                            <h2 class="title text-center">result Items</h2>
+                            <h3 style="text-align: center;"> Category: ${param.category}<br/> min price: ${param.minPrice}<br/> max price: ${param.maxPrice}</h3>
                             <c:if test="${empty products}">
-                            <h2>no products in this category</h2>
+                            <h2> no results found</h2>
                             </c:if>
                             <!--div ely hytkkr kaza mara momken ytkrr 12 bs w b3d kda a5leh yro7 nfs page tanya w ygeb 12--> 
                             <c:forEach items="${products}" var="product">
@@ -86,16 +86,7 @@
                             </div>
                             </c:forEach>
 
-
-
-                            
                         </div><!--features_items-->
-                        <ul class="pagination">
-                                <c:forEach begin="1" end="${pagesNo}" var="no"> 
-                                <li <c:if test="${no == pageNo}">class="active"</c:if>><a href="${baseURL}Products?category=${category}&page=${no}">${no}</a></li>
-                                </c:forEach>
-                                <li><a href="${baseURL}Products?category=${category}&page=${pageNo+1}">&raquo;</a></li>
-                        </ul>
                     </div>
                 </div>
             </div>

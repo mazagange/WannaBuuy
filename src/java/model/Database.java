@@ -30,7 +30,7 @@ public class Database implements DB {
 
     final static String URL = "jdbc:mysql://localhost/wannabuy";
     final static String USER = "root";
-    final static String PASS = "root";
+    final static String PASS = "";
     private Connection con;
 
     private Database() {
@@ -142,7 +142,7 @@ public class Database implements DB {
     @Override
     public void updateUser(User user) {
         try {
-            PreparedStatement pst = con.prepareStatement("UPDATE user set fname=?,lname=?,city=?,zip=?,phone=?,country=?,address=? where user_id=?");
+            PreparedStatement pst = con.prepareStatement("UPDATE user set fname=?,lname=?,city=?,zip=?,phone=?,country=?,address=?,credite=? where user_id=?");
             pst.setString(1, user.getFirstName());
             pst.setString(2, user.getLastName());
             pst.setString(3, user.getCity());
@@ -150,7 +150,8 @@ public class Database implements DB {
             pst.setString(5, user.getPhone());
             pst.setString(6, user.getCountry());
             pst.setString(7, user.getAddress());
-            pst.setInt(8, user.getId());
+            pst.setDouble(8, user.getCredit());
+            pst.setInt(9, user.getId());
             pst.executeUpdate();
             pst.close();
         } catch (SQLException ex) {

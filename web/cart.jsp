@@ -31,64 +31,7 @@
         <link rel="apple-touch-icon-precomposed" sizes="114x114" href="images/ico/apple-touch-icon-114-precomposed.png">
         <link rel="apple-touch-icon-precomposed" sizes="72x72" href="images/ico/apple-touch-icon-72-precomposed.png">
         <link rel="apple-touch-icon-precomposed" href="images/ico/apple-touch-icon-57-precomposed.png">
-     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-   <script >
-     function cartQuantityUp(id, inStock, price) {
-                var quentity = id.value;
-                quentity++;
-                if (quentity <= inStock && inStock !== 0) {
-                    AddToCart(id.id.substring(8, 9), quentity, inStock);
-                    console.log("in up" + id.id.substring(8, 9));
-                    document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
-                    id.value = quentity;
-                }
-            }
-            function cartQuatityDown(id, inStock, price) {
-                var quentity =  id.value;
-                quentity--;
-                if (quentity > 0 && inStock !== 0) {
-                    AddToCart(id.id.substring(8, 9), quentity, inStock);
-                    console.log("in down" + id.id.substring(8, 9));
-                    document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
-                    id.value = quentity;
-                }
-                
-            }
-            function deleteRow(row, product_id) {
-                 console.log("am in delete row");
-                var i = row.parentNode.parentNode.rowIndex;
-                console.log("row index " + i + "p " + product_id);
-                console.log(" am here in add to cart  ");
-                document.getElementById('tbody').deleteRow(i - 1);
-                romveFromCart(product_id);
-                var count = document.getElementById("tbody").children.length;
-                console.log(" count " + count);
-                if (count === 0) {
-                document.getElementById("error_msg").innerHTML="NO Product in cart";
-                document.getElementById("error_msg").style.display='block';
-                console.log("NO Product in cart");
-                    }
-        
-    }
-            function romveFunCallBack(responseTxt, statusTxt, xhr) {
-                if (statusTxt === "success") {
-                    console.log(" one product added to cart");
-                }
-            }
-            function AddToCart(product_id, quentity, inStock) {
-                if (inStock >= quentity && inStock !== 0) {
-                    $.get("AddToCart", {
-                                        "productId": product_id,
-                                        "quentity": quentity
-                    }, romveFunCallBack);
-
-                }
-            }
-            function romveFromCart(product_id) {
-                $.get("RemoveProductFromCart", {"productId": product_id}
-                , romveFunCallBack);
-            }
-     </script>
+     
 </head><!--/head-->
 
   
@@ -132,13 +75,13 @@
                            <c:set var="totalPrice" value="${totalPrice +orderProduct.product.price*orderProduct.quantity}" />
                            <tr> 
                            <td class="cart_product">
-                               <a href=""><img src="${orderProduct.product.image}" alt=""></a>
+                               <a href=""><img width="30px" src="${orderProduct.product.image}" alt=""></a>
                            </td>
                            <td class="cart_description">
-                               <h4><a href="">${orderProduct.product.description}</a></h4><p>Web ID:<c:out value="${orderProduct.product.id}"/></p>
+                               <h4><a href="">${orderProduct.product.description}</a></h4><p>product ID:<c:out value="${orderProduct.product.id}"/></p>
                            </td>
                            <td class="cart_price">
-                               <p>$<c:out value="${orderProduct.product.price}"/></p>
+                               <p>EGP <c:out value="${orderProduct.product.price}"/></p>
                            </td>
                            <td class="cart_quantity">
                                <div class="cart_quantity_button">
@@ -148,7 +91,7 @@
                                </div>
                            </td>
                            <td class="cart_total">
-                               <p class="cart_total_price" id="p${orderProduct.product.id}">$<c:out value="${orderProduct.product.price*orderProduct.quantity}"/></p>
+                               <p class="cart_total_price" id="p${orderProduct.product.id}">EGP <c:out value="${orderProduct.product.price*orderProduct.quantity}"/></p>
                            </td>
                            <td class="cart_delete">
                                <a class="cart_quantity_delete" onclick="deleteRow(this,${orderProduct.product.id})">
@@ -257,5 +200,62 @@
     <script src="js/jquery.scrollUp.min.js"></script>
     <script src="js/jquery.prettyPhoto.js"></script>
     <script src="js/main.js"></script>
+   <script>
+     function cartQuantityUp(id, inStock, price) {
+                var quentity = id.value;
+                quentity++;
+                if (quentity <= inStock && inStock !== 0) {
+                    AddToCart(id.id.substring(8, 9), quentity, inStock);
+                    console.log("in up" + id.id.substring(8, 9));
+                    document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "EGP" + eval(price * quentity);
+                    id.value = quentity;
+                }
+            }
+            function cartQuatityDown(id, inStock, price) {
+                var quentity =  id.value;
+                quentity--;
+                if (quentity > 0 && inStock !== 0) {
+                    AddToCart(id.id.substring(8, 9), quentity, inStock);
+                    console.log("in down" + id.id.substring(8, 9));
+                    document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "EGP" + eval(price * quentity);
+                    id.value = quentity;
+                }
+                
+            }
+            function deleteRow(row, product_id) {
+                 console.log("am in delete row");
+                var i = row.parentNode.parentNode.rowIndex;
+                console.log("row index " + i + "p " + product_id);
+                console.log(" am here in add to cart  ");
+                document.getElementById('tbody').deleteRow(i - 1);
+                romveFromCart(product_id);
+                var count = document.getElementById("tbody").children.length;
+                console.log(" count " + count);
+                if (count === 0) {
+                document.getElementById("error_msg").innerHTML="NO Product in cart";
+                document.getElementById("error_msg").style.display='block';
+                console.log("NO Product in cart");
+                    }
+        
+    }
+            function romveFunCallBack(responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    console.log(" one product added to cart");
+                }
+            }
+            function AddToCart(product_id, quentity, inStock) {
+                if (inStock >= quentity && inStock !== 0) {
+                    $.post("AddToCart", {
+                                        "productId": product_id,
+                                        "quentity": quentity
+                    }, romveFunCallBack);
+
+                }
+            }
+            function romveFromCart(product_id) {
+                $.get("RemoveProductFromCart", {"productId": product_id}
+                , romveFunCallBack);
+            }
+     </script>
 </body>
 </html>

@@ -24,7 +24,7 @@ import model.User;
  *
  * @author Sama
  */
-public class RetrieveFromCart extends HttpServlet {
+public class CheckOut extends HttpServlet {
 
         String buildGsonFromList(List<OrderProduct> orderProductList) {
         
@@ -52,7 +52,7 @@ public class RetrieveFromCart extends HttpServlet {
             System.out.println("list "+orderProductList.size());
             
              request.setAttribute("orderProductList", orderProductList);
-             request.getRequestDispatcher("cart.jsp").forward(request, response);
+             request.getRequestDispatcher("checkout.jsp").forward(request, response);
     }
 
     

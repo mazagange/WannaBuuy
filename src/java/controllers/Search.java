@@ -23,8 +23,18 @@ import model.Product;
  */
 public class Search extends HttpServlet {
 
+    
+
+    /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String category = request.getParameter("category");
         String searchText = request.getParameter("searchText");
@@ -52,22 +62,7 @@ public class Search extends HttpServlet {
             request.setAttribute("products", products);
             request.setAttribute("category", category);
             
-            request.getRequestDispatcher("shop.jsp").forward(request, response);
-        
-    }
-
-    /**
-     * Handles the HTTP <code>POST</code> method.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
-     */
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        doGet(request, response);
+            request.getRequestDispatcher("search.jsp").forward(request, response);
     }
 
     /**

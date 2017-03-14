@@ -28,7 +28,7 @@ public class DisplayOrderProduct extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            HttpSession session = request.getSession(true);
+            HttpSession session = request.getSession(false);
             User userObj=(User) session.getAttribute("user");
             Business business=new Business();
             System.out.println("usr"+userObj.toString());
