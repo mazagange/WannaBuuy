@@ -39,12 +39,7 @@
         <jsp:include page="header.jsp" />
         <!--end the header of the page-->
 
-        <section id="advertisement">
-            <div class="container">
-                <img src="images/shop/advertisement.jpg" alt="" />
-            </div>
-        </section>
-
+       
         <section>
             <div class="container">
                 <div class="row">
@@ -57,7 +52,7 @@
                             <h2 class="title text-center">Features Items</h2>
 
                             <c:if test="${empty products}">
-                            <h2>no products in this category</h2>
+                            <h2>no products </h2>
                             </c:if>
                             <!--div ely hytkkr kaza mara momken ytkrr 12 bs w b3d kda a5leh yro7 nfs page tanya w ygeb 12--> 
                             <c:forEach items="${products}" var="product">

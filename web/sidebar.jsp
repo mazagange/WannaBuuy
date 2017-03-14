@@ -28,8 +28,8 @@
                                     <input id="minPrice" type="hidden" name="minPrice" value="250"/>
                                     <input id="maxPrice" type="hidden" name="maxPrice" value="450"/>
                                     <div class="well text-center">
-                                        <input type="range" name="price" class="span2" value="" data-slider-min="0" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
-                                        <b class="pull-left">0 EGP</b> <b class="pull-right">1500 EGP</b>
+                                        <input type="range" name="price" class="span2" value="" data-slider-min="0" data-slider-max="10000" data-slider-step="5" data-slider-value="[250,450]" id="sl2" ><br />
+                                        <b class="pull-left">0 EGP</b> <b class="pull-right">10000 EGP</b>
                                     </div>
                             </div>
 

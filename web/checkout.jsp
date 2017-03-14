@@ -102,7 +102,7 @@
                                             <a href=""><img width="30px" src="${orderProduct.product.image}" alt=""></a>
                                         </td>
                                         <td class="cart_description">
-                                            <h4><a href="">${orderProduct.product.description}</a></h4><p>Product ID:<c:out value="${orderProduct.product.id}"/></p>
+                                            <h4><a href="">${orderProduct.product.name}</a></h4><p>Product ID:<c:out value="${orderProduct.product.id}"/></p>
                                         </td>
                                         <td class="cart_price">
                                             <p>EGP <c:out value="${orderProduct.product.price}"/></p>

@@ -78,7 +78,7 @@
                                <a href=""><img width="30px" src="${orderProduct.product.image}" alt=""></a>
                            </td>
                            <td class="cart_description">
-                               <h4><a href="">${orderProduct.product.description}</a></h4><p>product ID:<c:out value="${orderProduct.product.id}"/></p>
+                               <h4><a href="">${orderProduct.product.name}</a></h4><p>product ID:<c:out value="${orderProduct.product.id}"/></p>
                            </td>
                            <td class="cart_price">
                                <p>EGP <c:out value="${orderProduct.product.price}"/></p>
@@ -253,7 +253,7 @@
                 }
             }
             function romveFromCart(product_id) {
-                $.get("RemoveProductFromCart", {"productId": product_id}
+                $.post("RemoveProductFromCart", {"productId": product_id}
                 , romveFunCallBack);
             }
      </script>
