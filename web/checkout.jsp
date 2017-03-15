@@ -185,139 +185,146 @@
         <script src="js/jquery.prettyPhoto.js"></script>
         <script src="js/main.js"></script>
         <script>
-                                
-                                var checkBalance = false;
-                                var totalPrice = document.getElementById("total").value;
-                                var userExist = false;
-                                function checkBalancefunction() {
-                                    var userCredit = document.getElementById("userCredit").value;
-                                    var total = document.getElementById("total").value;
-                                    if (parseInt(userCredit) >= parseInt(total)) {
-                                        checkBalance = true;
-                                    }
-                                    return checkBalance;
-                                }
-                                function cartQuantityUp(id, inStock, price) {
-                                    var quentity = id.value;
-                                    quentity++;
-                                    if (quentity <= inStock && inStock !== 0) {
-                                        AddToCart(id.id.substring(8, 9), quentity, inStock);
-                                        console.log("in up" + id.id.substring(8, 9));
-                                        document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
-                                        id.value = quentity;
-                                        totalPrice = document.getElementById("total").value;
-                                        totalPrice = parseInt(totalPrice) + price;
-                                        document.getElementById("spaneid").innerHTML = "$" + totalPrice + ".0";
-                                        document.getElementById("total").value = totalPrice;
-                                    }
-                                }
-                                function cartQuatityDown(id, inStock, price) {
-                                    var quentity = id.value;
-                                    quentity--;
-                                    if (quentity > 0 && inStock !== 0) {
-                                        AddToCart(id.id.substring(8, 9), quentity, inStock);
-                                        console.log("in down" + id.id.substring(8, 9));
-                                        id.value = quentity;
-                                        document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
-                                        totalPrice = document.getElementById("total").value;
-                                        totalPrice = parseInt(totalPrice) - price;
-                                        document.getElementById("spaneid").innerHTML = "$" + totalPrice + ".0";
-                                        document.getElementById("total").value = totalPrice;
-                                    }
-                                }
-                                function deleteRow(id, row, product_id, price) {
-                                    var i = row.parentNode.parentNode.rowIndex;
-                                    console.log("row index " + i + "p " + product_id);
-                                    console.log(" am here in add to cart  ");
-                                    document.getElementById('tbody').deleteRow(i - 1);
-                                    romveFromCart(product_id);
-                                    var count = document.getElementById("tbody").children.length;
-                                    count--;
-                                    console.log(" count " + count);
-                                    if (count === 0) {
-                                        console.log("NO Product in cart");
-                                        document.getElementById("error_msg").innerHTML = "NO Product in cart";
-                                        document.getElementById("error_msg").style.display = 'block';
-                                    }
-                                    var quentity = id.value;
-                                    totalPrice = document.getElementById("total").value;
-                                    totalPrice = parseInt(totalPrice) - quentity * price;
-                                    document.getElementById("spaneid").innerHTML = "$" + totalPrice + ".0";
-                                    document.getElementById("total").value = totalPrice;
-                                }
 
-                                function romveFunCallBack(responseTxt, statusTxt, xhr) {
-                                    if (statusTxt === "success") {
-                                        console.log(" one product deleted from cart  ");
-                                    }
-                                }
-                                function AddToCart(product_id, quentity, inStock) {
-                                    if (inStock >= quentity && inStock !== 0) {
-                                        $.get("AddToCart", {
-                                            "productId": product_id,
-                                            "quentity": quentity
-                                        }, romveFunCallBack);
-                                    }
-                                }
-                                function romveFromCart(product_id) {
-                                    $.get("RemoveProductFromCart", {"productId": product_id}
-                                    , romveFunCallBack);
-                                }
-                                $("#orderForm").submit( function(ev){
-                                    var shipping = document.getElementById("ShippingAdrress").value;
-                                    var city = document.getElementById("city").value;
-                                    var state = document.getElementById("state").value;
-                                    var phone = document.getElementById("phone").value;
-                                    var country = document.getElementById("country").value;
-                                    var zip = document.getElementById("zip").value;
-                                    var count = document.getElementById("tbody").children.length;
-                                    count--;
-                                    console.log("count " + count);
-                                    if (count !== 0) {
-                                        if (checkBalancefunction()) {
-                                            if (shipping !== "" && city !== "" && state !== "" && phone !== "" && country !== "" && zip !== "") {
-                                                $.post("ShippingOrder", {"ShippingAdrress": $("#ShippingAdrress").val(),
-                                                    "city": $("#city").val(),
-                                                    "state": $("#state").val(),
-                                                    "phone": $("#phone").val(),
-                                                    "country": $("#country").val(),
-                                                    "zip": $("#zip").val(),
-                                                    "totalPrice": totalPrice
-                                                }, shippingOrderCallBack);
-                                                document.getElementById("ShippingAdrress").value = "";
-                                                document.getElementById("city").value = "";
-                                                document.getElementById("state").value = "";
-                                                document.getElementById("phone").value = "";
-                                                document.getElementById("country").value = "";
-                                                document.getElementById("zip").value = "";
-                                                console.log(" am here in add to cart  ");
-                                                document.getElementById("total").value = null;
-                                                document.getElementById("tbody").innerHTML = "";
+            var checkBalance = false;
+            var totalPrice = document.getElementById("total").value;
+            var userExist = false;
+            function checkBalancefunction() {
+                var userCredit = document.getElementById("userCredit").value;
+                var total = document.getElementById("total").value;
+                if (parseInt(userCredit) >= parseInt(total)) {
+                    checkBalance = true;
+                }
+                return checkBalance;
+            }
+            function cartQuantityUp(id, inStock, price) {
+                var quentity = id.value;
+                quentity++;
+                if (quentity <= inStock && inStock !== 0) {
+                    AddToCart(id.id.substring(8, 9), quentity, inStock);
+                    console.log("in up" + id.id.substring(8, 9));
+                    document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
+                    id.value = quentity;
+                    totalPrice = document.getElementById("total").value;
+                    totalPrice = parseInt(totalPrice) + price;
+                    document.getElementById("spaneid").innerHTML = "$" + totalPrice + ".0";
+                    document.getElementById("total").value = totalPrice;
+                }
+            }
+            function cartQuatityDown(id, inStock, price) {
+                var quentity = id.value;
+                quentity--;
+                if (quentity > 0 && inStock !== 0) {
+                    AddToCart(id.id.substring(8, 9), quentity, inStock);
+                    console.log("in down" + id.id.substring(8, 9));
+                    id.value = quentity;
+                    document.getElementById("p" + id.id.substring(8, 9)).innerHTML = "$" + eval(price * quentity);
+                    totalPrice = document.getElementById("total").value;
+                    totalPrice = parseInt(totalPrice) - price;
+                    document.getElementById("spaneid").innerHTML = "$" + totalPrice + ".0";
+                    document.getElementById("total").value = totalPrice;
+                }
+            }
+            function deleteRow(id, row, product_id, price) {
+                var i = row.parentNode.parentNode.rowIndex;
+                console.log("row index " + i + "p " + product_id);
+                console.log(" am here in add to cart  ");
+                document.getElementById('tbody').deleteRow(i - 1);
+                romveFromCart(product_id);
+                var count = document.getElementById("tbody").children.length;
+                count--;
+                console.log(" count " + count);
+                if (count === 0) {
+                    console.log("NO Product in cart");
+                    document.getElementById("error_msg").innerHTML = "NO Product in cart";
+                    document.getElementById("error_msg").style.display = 'block';
+                }
+                var quentity = id.value;
+                totalPrice = document.getElementById("total").value;
+                totalPrice = parseInt(totalPrice) - quentity * price;
+                document.getElementById("spaneid").innerHTML = "$" + totalPrice + ".0";
+                document.getElementById("total").value = totalPrice;
+            }
 
-                                            } else {
-                                                console.log("credit erro");
-                                                document.getElementById("error_msg").innerHTML = "fill all required data";
-                                                document.getElementById("error_msg").style.display = 'block';
-                                            }
-                                        } else {
-                                            console.log("credit erro");
-                                            document.getElementById("error_msg").innerHTML = "NO amonut availble in your Credit";
-                                            document.getElementById("error_msg").style.display = 'block';
-                                        }
-                                    } else {
-                                        console.log("credit erro");
-                                        document.getElementById("error_msg").innerHTML = "NO product in cart";
-                                        document.getElementById("error_msg").style.display = 'block';
-                                    }
-                                    return false;
-                                });
+            function romveFunCallBack(responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    console.log(" one product deleted from cart  ");
+                }
+            }
+            function AddToCart(product_id, quentity, inStock) {
+                if (inStock >= quentity && inStock !== 0) {
+                    $.get("AddToCart", {
+                        "productId": product_id,
+                        "quentity": quentity
+                    }, romveFunCallBack);
+                }
+            }
+            function romveFromCart(product_id) {
+                $.get("RemoveProductFromCart", {"productId": product_id}
+                , romveFunCallBack);
+            }
+            $("#orderForm").submit(function (ev) {
+                var shipping = document.getElementById("ShippingAdrress").value;
+                var city = document.getElementById("city").value;
+                var state = document.getElementById("state").value;
+                var phone = document.getElementById("phone").value;
+                var country = document.getElementById("country").value;
+                var zip = document.getElementById("zip").value;
+                var count = document.getElementById("tbody").children.length;
+                count--;
+                console.log("count " + count);
+                if (count !== 0) {
+                    if (checkBalancefunction()) {
+                        if (shipping !== "" && city !== "" && state !== "" && phone !== "" && country !== "" && zip !== "") {
+                            $.post("ShippingOrder", {"ShippingAdrress": $("#ShippingAdrress").val(),
+                                "city": $("#city").val(),
+                                "state": $("#state").val(),
+                                "phone": $("#phone").val(),
+                                "country": $("#country").val(),
+                                "zip": $("#zip").val(),
+                                "totalPrice": totalPrice
+                            }, shippingOrderCallBack);
 
-                                function shippingOrderCallBack(responseTxt, statusTxt, xhr) {
-                                    if (statusTxt === "success") {
-                                        document.getElementById("error_msg").innerHTML = responseTxt;
-                                        document.getElementById("error_msg").style.display = 'block';
-                                    }
-                                }
+
+                        } else {
+                            console.log("credit erro");
+                            document.getElementById("error_msg").innerHTML = "fill all required data";
+                            document.getElementById("error_msg").style.display = 'block';
+                        }
+                    } else {
+                        console.log("credit erro");
+                        document.getElementById("error_msg").innerHTML = "NO amonut availble in your Credit";
+                        document.getElementById("error_msg").style.display = 'block';
+                    }
+                } else {
+                    console.log("credit erro");
+                    document.getElementById("error_msg").innerHTML = "NO product in cart";
+                    document.getElementById("error_msg").style.display = 'block';
+                }
+                return false;
+            });
+
+            function shippingOrderCallBack(responseTxt, statusTxt, xhr) {
+                if (statusTxt === "success") {
+                    if(responseTxt == "order Submited"){
+                    document.getElementById("error_msg").innerHTML = responseTxt;
+                    document.getElementById("error_msg").style.display = 'block';
+                    document.getElementById("ShippingAdrress").value = "";
+                    document.getElementById("city").value = "";
+                    document.getElementById("state").value = "";
+                    document.getElementById("phone").value = "";
+                    document.getElementById("country").value = "";
+                    document.getElementById("zip").value = "";
+                    console.log(" am here in add to cart  ");
+                    document.getElementById("total").value = null;
+                    document.getElementById("tbody").innerHTML = "";
+                }else{
+                    document.getElementById("error_msg").innerHTML = responseTxt;
+                    document.getElementById("error_msg").style.display = 'block';
+                    
+                }
+                }
+            }
         </script>
     </body>
 </html>
